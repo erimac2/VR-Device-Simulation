@@ -6,6 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class Socket : XRSocketInteractor
 {
     private Device device;
+    [SerializeField] private AudioClip connectedSound;
     [SerializeField] private ConnectorData connectorData;
     [SerializeField] private SocketType socketType = 0;
     private Connector thisEnd;
@@ -56,10 +57,35 @@ public class Socket : XRSocketInteractor
             return false;
         }
     }
+    protected override void OnSelectEntered(SelectEnterEventArgs args)
+    {
+        base.OnSelectEntered(args);
+        SoundManager.instance.PlaySoundEffectAtPosition(connectedSound, transform.position);
+        device.connectedCount++;
+        if(device.gameObject.GetComponent<XRGrabInteractable>() != null)
+        {
+            device.gameObject.GetComponent<XRGrabInteractable>().enabled = false;
+        }
+        SetConnectedTo();
+    }
+    protected override void OnSelectExited(SelectExitEventArgs args)
+    {
+        base.OnSelectExited(args);
+        RemoveConnectedTo();
+        device.connectedCount--;
+        if(device.connectedCount == 0)
+        {
+            if(device.gameObject.GetComponent<XRGrabInteractable>() != null)
+            {
+                device.gameObject.GetComponent<XRGrabInteractable>().enabled = true;
+            }
+        }
+    }
     public void SetConnectedTo()
     {
         thisEnd = this.GetOldestInteractableSelected().transform.GetComponent<Connector>();
-        thisEnd.GetComponent<Connector>().connectedToDevice = device;
+        thisEnd.connectedToDevice = device;
+        thisEnd.socketType = socketType;
         Transform parent = thisEnd.originalParent.transform;
         if(parent.childCount > 0)
         {
@@ -73,6 +99,13 @@ public class Socket : XRSocketInteractor
         else
         {
             otherEnd = thisEnd.otherEnd;
+            if(thisEnd.socketType == SocketType.Both && otherEnd.socketType == SocketType.Both 
+                || thisEnd.socketType == SocketType.In && otherEnd.socketType == SocketType.Out 
+                || thisEnd.socketType == SocketType.Out && otherEnd.socketType == SocketType.In)
+            {
+                device.connections.Add(otherEnd.connectedToDevice);
+                otherEnd.connectedToDevice.connections.Add(device);
+            }
             Debug.LogWarning(transform.parent.GetComponent<Device>().deviceName + " is connected to " + otherEnd.connectedToDevice.deviceName);
         }
         thisEnd.gameObject.layer = LayerMask.NameToLayer("Object Ignore Collision");
@@ -81,7 +114,15 @@ public class Socket : XRSocketInteractor
     public void RemoveConnectedTo()
     {
         thisEnd.gameObject.layer = LayerMask.NameToLayer("Object");
+        if(otherEnd.connectedToDevice != null)
+        {
+            device.connections.Remove(otherEnd.connectedToDevice);
+            otherEnd.connectedToDevice.connections.Remove(device);
+        }
+        thisEnd.connectedToDevice = null;
+        thisEnd.socketType = 0;
         thisEnd = null;
+        otherEnd = null;
     }
 }
 public enum SocketType

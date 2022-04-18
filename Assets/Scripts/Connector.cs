@@ -9,6 +9,8 @@ public class Connector : MonoBehaviour
     [HideInInspector] public GameObject originalParent;
     [HideInInspector] public Connector otherEnd;
     [HideInInspector] public Device connectedToDevice;
+    [HideInInspector] public SocketType socketType;
+    public bool isFullDevice;
     void Start()
     {
         originalParent = transform.parent.gameObject;
