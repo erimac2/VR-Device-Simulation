@@ -5,8 +5,8 @@ using UnityEngine;
 public class Device : MonoBehaviour
 {
     public string deviceName;
-    public List<GameObject> sockets;
-    public List<Device> connections;
+    public List<GameObject> sockets = new List<GameObject>();
+    public List<Connection> connections = new List<Connection>();
     [HideInInspector] public int connectedCount = 0;
 
     void Start()
@@ -16,5 +16,27 @@ public class Device : MonoBehaviour
         {
             sockets.Add(child.gameObject);
         }
+    }
+    public void PrintConnections()
+    {
+        foreach(Connection connection in connections)
+        {
+            print(connection.ToString());
+        }
+    }
+}
+public class Connection
+{
+    public Device device;
+    public ConnectorData connectorData;
+
+    public Connection(Device device, ConnectorData connectorData)
+    {
+        this.device = device;
+        this.connectorData = connectorData;
+    }
+    public override string ToString()
+    {
+        return device.name + " " + connectorData.name;
     }
 }

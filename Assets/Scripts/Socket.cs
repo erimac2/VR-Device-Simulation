@@ -11,6 +11,8 @@ public class Socket : XRSocketInteractor
     [SerializeField] private SocketType socketType = 0;
     private Connector thisEnd;
     private Connector otherEnd;
+    private Connection currentConnection;
+    private Connection currentOtherEndConnection;
     protected override void Start()
     {
         base.Start();
@@ -103,8 +105,15 @@ public class Socket : XRSocketInteractor
                 || thisEnd.socketType == SocketType.In && otherEnd.socketType == SocketType.Out 
                 || thisEnd.socketType == SocketType.Out && otherEnd.socketType == SocketType.In)
             {
-                device.connections.Add(otherEnd.connectedToDevice);
-                otherEnd.connectedToDevice.connections.Add(device);
+                currentConnection = new Connection(device, connectorData);
+                currentOtherEndConnection = new Connection(otherEnd.connectedToDevice, connectorData);
+                print(currentConnection.device);
+                print(currentOtherEndConnection.device);
+                print(device);
+                device.connections.Add(currentOtherEndConnection);
+                otherEnd.connectedToDevice.connections.Add(currentConnection);
+                device.PrintConnections();
+                otherEnd.connectedToDevice.PrintConnections();
             }
             Debug.LogWarning(transform.parent.GetComponent<Device>().deviceName + " is connected to " + otherEnd.connectedToDevice.deviceName);
         }
@@ -116,8 +125,10 @@ public class Socket : XRSocketInteractor
         thisEnd.gameObject.layer = LayerMask.NameToLayer("Object");
         if(otherEnd.connectedToDevice != null)
         {
-            device.connections.Remove(otherEnd.connectedToDevice);
-            otherEnd.connectedToDevice.connections.Remove(device);
+            device.connections.Remove(currentOtherEndConnection);
+            otherEnd.connectedToDevice.connections.Remove(currentConnection);
+            currentConnection = null;
+            currentOtherEndConnection = null;
         }
         thisEnd.connectedToDevice = null;
         thisEnd.socketType = 0;
