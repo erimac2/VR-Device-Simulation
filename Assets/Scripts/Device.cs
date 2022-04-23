@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,17 +6,12 @@ using UnityEngine;
 public class Device : MonoBehaviour
 {
     public string deviceName;
-    public List<GameObject> sockets = new List<GameObject>();
     public List<Connection> connections = new List<Connection>();
     [HideInInspector] public int connectedCount = 0;
 
     void Start()
     {
         deviceName = gameObject.name;
-        foreach(Transform child in transform)
-        {
-            sockets.Add(child.gameObject);
-        }
     }
     public void PrintConnections()
     {
@@ -25,18 +21,30 @@ public class Device : MonoBehaviour
         }
     }
 }
-public class Connection
+[Serializable]
+public class Connection : IEquatable<Connection>
 {
-    public Device device;
+    public Device otherDevice;
     public ConnectorData connectorData;
 
-    public Connection(Device device, ConnectorData connectorData)
+    public Connection(Device otherDevice, ConnectorData connectorData)
     {
-        this.device = device;
+        this.otherDevice = otherDevice;
         this.connectorData = connectorData;
     }
     public override string ToString()
     {
-        return device.name + " " + connectorData.name;
+        return otherDevice.name + " " + connectorData.name;
+    }
+    public bool Equals(Connection other)
+    {
+        if (other == null)
+        {
+            return false;
+        }
+        else
+        {
+            return otherDevice == other.otherDevice && connectorData == other.connectorData;
+        }
     }
 }

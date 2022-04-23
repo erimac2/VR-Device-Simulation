@@ -14,6 +14,7 @@ public class TeleportationManager : MonoBehaviour
     [SerializeField] private InputActionReference teleportMove;
     private bool isActive = false;
     private bool holdingItem = false;
+    private bool isEnabled = true;
 
 
     // Start is called before the first frame update
@@ -37,7 +38,7 @@ public class TeleportationManager : MonoBehaviour
 
         if (rayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit hit))
         {
-            if(hit.collider.gameObject.GetComponent<TeleportationArea>() != null)
+            if (hit.collider.gameObject.GetComponent<TeleportationArea>() != null)
             {
                 TeleportRequest teleportRequest = new TeleportRequest()
                 {
@@ -56,9 +57,12 @@ public class TeleportationManager : MonoBehaviour
     }
     private void OnTeleportActivate(InputAction.CallbackContext context)
     {
-        rayInteractor.enabled = true;
-        teleportReticle.SetActive(true);
-        isActive = true;
+        if (enabled)
+        {
+            rayInteractor.enabled = true;
+            teleportReticle.SetActive(true);
+            isActive = true;
+        }
     }
     private void OnTeleportCancel(InputAction.CallbackContext context)
     {
@@ -68,13 +72,24 @@ public class TeleportationManager : MonoBehaviour
     }
     public void SetHoldingItem(bool hasItem)
     {
-        if(hasItem)
+        if (hasItem)
         {
             holdingItem = true;
         }
         else
         {
             holdingItem = false;
+        }
+    }
+    public void Enable(bool enabled)
+    {
+        if(enabled)
+        {
+            isEnabled = true;
+        }
+        else
+        {
+            isEnabled = false;
         }
     }
 }

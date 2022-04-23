@@ -121,9 +121,9 @@ public class Wire : MonoBehaviour
         lineRenderer.endWidth = lineWidth;
 
         Vector3[] wirePositions = new Vector3[this.wireLength];
-        for (int i = 0; i < this.wireLength; i++)
+        for (int i = 0; i < wireLength; i++)
         {
-            wirePositions[i] = this.wireSegments[i].posNow;
+            wirePositions[i] = wireSegments[i].posNow;
         }
 
         lineRenderer.positionCount = wirePositions.Length;

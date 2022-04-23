@@ -89,44 +89,37 @@ public class Socket : XRSocketInteractor
         thisEnd.connectedToDevice = device;
         thisEnd.socketType = socketType;
         Transform parent = thisEnd.originalParent.transform;
-        if(parent.childCount > 0)
+        if (parent.childCount > 0)
         {
             foreach (Transform child in parent)
             {
                 otherEnd = child.GetComponent<Connector>();
                 otherEnd.otherEnd = thisEnd;
-                Debug.LogWarning(otherEnd + " " + child.GetComponent<Connector>());
             }
         }
         else
         {
             otherEnd = thisEnd.otherEnd;
-            if(thisEnd.socketType == SocketType.Both && otherEnd.socketType == SocketType.Both 
+            if (thisEnd.socketType == SocketType.Both && (otherEnd.socketType == SocketType.Both || otherEnd.socketType == SocketType.In || otherEnd.socketType == SocketType.Out)
+                || (thisEnd.socketType == SocketType.Both || thisEnd.socketType == SocketType.In || thisEnd.socketType == SocketType.Out) && otherEnd.socketType == SocketType.Both
                 || thisEnd.socketType == SocketType.In && otherEnd.socketType == SocketType.Out 
                 || thisEnd.socketType == SocketType.Out && otherEnd.socketType == SocketType.In)
             {
-                currentConnection = new Connection(device, connectorData);
-                currentOtherEndConnection = new Connection(otherEnd.connectedToDevice, connectorData);
-                print(currentConnection.device);
-                print(currentOtherEndConnection.device);
-                print(device);
-                device.connections.Add(currentOtherEndConnection);
-                otherEnd.connectedToDevice.connections.Add(currentConnection);
-                device.PrintConnections();
-                otherEnd.connectedToDevice.PrintConnections();
+                currentConnection = new Connection(otherEnd.connectedToDevice, connectorData);
+                currentOtherEndConnection = new Connection(device, connectorData);
+                device.connections.Add(currentConnection);
+                otherEnd.connectedToDevice.connections.Add(currentOtherEndConnection);
             }
-            Debug.LogWarning(transform.parent.GetComponent<Device>().deviceName + " is connected to " + otherEnd.connectedToDevice.deviceName);
         }
         thisEnd.gameObject.layer = LayerMask.NameToLayer("Object Ignore Collision");
-        Debug.LogWarning(thisEnd.GetComponent<Connector>().connectedToDevice.deviceName);
     }
     public void RemoveConnectedTo()
     {
         thisEnd.gameObject.layer = LayerMask.NameToLayer("Object");
         if(otherEnd.connectedToDevice != null)
         {
-            device.connections.Remove(currentOtherEndConnection);
-            otherEnd.connectedToDevice.connections.Remove(currentConnection);
+            device.connections.Remove(currentConnection);
+            otherEnd.connectedToDevice.connections.Remove(currentOtherEndConnection);
             currentConnection = null;
             currentOtherEndConnection = null;
         }
