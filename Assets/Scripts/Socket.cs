@@ -17,9 +17,9 @@ public class Socket : XRSocketInteractor
     {
         base.Start();
         device = GetComponentInParent<Device>();
-        if(connectorData == null)
+        if (connectorData == null)
         {
-            List<ConnectorData> connectorObjects = Resources.LoadAll<ConnectorData>("").ToList();
+            List<ConnectorData> connectorObjects = Resources.LoadAll<ConnectorData>("ConnectorData").ToList();
             foreach (ConnectorData connectorObject in connectorObjects)
             {
                 if (gameObject.name.ToString().Contains(connectorObject.name))
@@ -39,7 +39,7 @@ public class Socket : XRSocketInteractor
     }
     private bool MatchHover(IXRHoverInteractable interactable)
     {
-        if(interactable.transform.GetComponent<Connector>() != null)
+        if (interactable.transform.GetComponent<Connector>() != null)
         {
             return interactable.transform.GetComponent<Connector>().CheckType(connectorData);
         }
@@ -64,7 +64,7 @@ public class Socket : XRSocketInteractor
         base.OnSelectEntered(args);
         SoundManager.instance.PlaySoundEffectAtPosition(connectedSound, transform.position);
         device.connectedCount++;
-        if(device.gameObject.GetComponent<XRGrabInteractable>() != null)
+        if (device.gameObject.GetComponent<XRGrabInteractable>() != null)
         {
             device.gameObject.GetComponent<XRGrabInteractable>().enabled = false;
         }
@@ -75,9 +75,9 @@ public class Socket : XRSocketInteractor
         base.OnSelectExited(args);
         RemoveConnectedTo();
         device.connectedCount--;
-        if(device.connectedCount == 0)
+        if (device.connectedCount == 0)
         {
-            if(device.gameObject.GetComponent<XRGrabInteractable>() != null)
+            if (device.gameObject.GetComponent<XRGrabInteractable>() != null)
             {
                 device.gameObject.GetComponent<XRGrabInteractable>().enabled = true;
             }
@@ -86,40 +86,58 @@ public class Socket : XRSocketInteractor
     public void SetConnectedTo()
     {
         thisEnd = this.GetOldestInteractableSelected().transform.GetComponent<Connector>();
-        thisEnd.connectedToDevice = device;
-        thisEnd.socketType = socketType;
-        Transform parent = thisEnd.originalParent.transform;
-        if (parent.childCount > 0)
+        if (thisEnd != null && thisEnd.isFullDevice)
         {
-            foreach (Transform child in parent)
-            {
-                otherEnd = child.GetComponent<Connector>();
-                otherEnd.otherEnd = thisEnd;
-            }
+            currentConnection = new Connection(thisEnd.connectedToDevice, connectorData);
+            currentOtherEndConnection = new Connection(device, connectorData);
+            device.connections.Add(currentConnection);
+            thisEnd.connectedToDevice.connections.Add(currentOtherEndConnection);
+            thisEnd.gameObject.layer = LayerMask.NameToLayer("Object Ignore Collision");
         }
         else
         {
-            otherEnd = thisEnd.otherEnd;
-            if (thisEnd.socketType == SocketType.Both && (otherEnd.socketType == SocketType.Both || otherEnd.socketType == SocketType.In || otherEnd.socketType == SocketType.Out)
-                || (thisEnd.socketType == SocketType.Both || thisEnd.socketType == SocketType.In || thisEnd.socketType == SocketType.Out) && otherEnd.socketType == SocketType.Both
-                || thisEnd.socketType == SocketType.In && otherEnd.socketType == SocketType.Out 
-                || thisEnd.socketType == SocketType.Out && otherEnd.socketType == SocketType.In)
+            thisEnd.connectedToDevice = device;
+            thisEnd.socketType = socketType;
+            Transform parent = thisEnd.originalParent.transform;
+            if (parent.childCount > 0)
             {
-                currentConnection = new Connection(otherEnd.connectedToDevice, connectorData);
-                currentOtherEndConnection = new Connection(device, connectorData);
-                device.connections.Add(currentConnection);
-                otherEnd.connectedToDevice.connections.Add(currentOtherEndConnection);
+                foreach (Transform child in parent)
+                {
+                    otherEnd = child.GetComponent<Connector>();
+                    otherEnd.otherEnd = thisEnd;
+                }
             }
+            else
+            {
+                otherEnd = thisEnd.otherEnd;
+                if (thisEnd.socketType == SocketType.Both && (otherEnd.socketType == SocketType.Both || otherEnd.socketType == SocketType.In || otherEnd.socketType == SocketType.Out)
+                    || (thisEnd.socketType == SocketType.Both || thisEnd.socketType == SocketType.In || thisEnd.socketType == SocketType.Out) && otherEnd.socketType == SocketType.Both
+                    || thisEnd.socketType == SocketType.In && otherEnd.socketType == SocketType.Out
+                    || thisEnd.socketType == SocketType.Out && otherEnd.socketType == SocketType.In)
+                {
+                    currentConnection = new Connection(otherEnd.connectedToDevice, connectorData);
+                    currentOtherEndConnection = new Connection(device, connectorData);
+                    device.connections.Add(currentConnection);
+                    otherEnd.connectedToDevice.connections.Add(currentOtherEndConnection);
+                }
+            }
+            thisEnd.gameObject.layer = LayerMask.NameToLayer("Object Ignore Collision");
         }
-        thisEnd.gameObject.layer = LayerMask.NameToLayer("Object Ignore Collision");
     }
     public void RemoveConnectedTo()
     {
         thisEnd.gameObject.layer = LayerMask.NameToLayer("Object");
-        if(otherEnd.connectedToDevice != null)
+        if (otherEnd != null && otherEnd.connectedToDevice != null)
         {
             device.connections.Remove(currentConnection);
             otherEnd.connectedToDevice.connections.Remove(currentOtherEndConnection);
+            currentConnection = null;
+            currentOtherEndConnection = null;
+        }
+        else
+        {
+            device.connections.Remove(currentConnection);
+            thisEnd.connectedToDevice.connections.Remove(currentOtherEndConnection);
             currentConnection = null;
             currentOtherEndConnection = null;
         }

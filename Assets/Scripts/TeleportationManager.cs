@@ -14,7 +14,6 @@ public class TeleportationManager : MonoBehaviour
     [SerializeField] private InputActionReference teleportMove;
     private bool isActive = false;
     private bool holdingItem = false;
-    private bool isEnabled = true;
 
 
     // Start is called before the first frame update
@@ -25,7 +24,6 @@ public class TeleportationManager : MonoBehaviour
         activate.action.performed += OnTeleportActivate;
         cancel.action.performed += OnTeleportCancel;
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -55,14 +53,24 @@ public class TeleportationManager : MonoBehaviour
         teleportReticle.SetActive(false);
         isActive = false;
     }
+    private void OnEnable()
+    {
+        activate.action.performed += OnTeleportActivate;
+        cancel.action.performed += OnTeleportCancel;
+    }
+    private void OnDisable()
+    {
+        activate.action.performed -= OnTeleportActivate;
+        cancel.action.performed -= OnTeleportCancel;
+    }
     private void OnTeleportActivate(InputAction.CallbackContext context)
     {
-        if (enabled)
+        if(rayInteractor != null)
         {
             rayInteractor.enabled = true;
-            teleportReticle.SetActive(true);
-            isActive = true;
         }
+        teleportReticle.SetActive(true);
+        isActive = true;
     }
     private void OnTeleportCancel(InputAction.CallbackContext context)
     {
@@ -79,17 +87,6 @@ public class TeleportationManager : MonoBehaviour
         else
         {
             holdingItem = false;
-        }
-    }
-    public void Enable(bool enabled)
-    {
-        if(enabled)
-        {
-            isEnabled = true;
-        }
-        else
-        {
-            isEnabled = false;
         }
     }
 }

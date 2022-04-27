@@ -14,6 +14,10 @@ public class Connector : MonoBehaviour
     void Start()
     {
         originalParent = transform.parent.gameObject;
+        if(isFullDevice)
+        {
+            connectedToDevice = GetComponentInParent<Device>();
+        }
         if (connectorData == null)
         {
             List<ConnectorData> connectorObjects = Resources.LoadAll<ConnectorData>("").ToList();
