@@ -13,7 +13,6 @@ public class TeleportationManager : MonoBehaviour
     [SerializeField] private InputActionReference cancel;
     [SerializeField] private InputActionReference teleportMove;
     private bool isActive = false;
-    private bool holdingItem = false;
 
 
     // Start is called before the first frame update
@@ -28,8 +27,6 @@ public class TeleportationManager : MonoBehaviour
     void Update()
     {
         if (!isActive)
-            return;
-        if (holdingItem)
             return;
         if (teleportMove.action.ReadValue<Vector2>() != Vector2.zero)
             return;
@@ -77,16 +74,5 @@ public class TeleportationManager : MonoBehaviour
         rayInteractor.enabled = false;
         teleportReticle.SetActive(false);
         isActive = false;
-    }
-    public void SetHoldingItem(bool hasItem)
-    {
-        if (hasItem)
-        {
-            holdingItem = true;
-        }
-        else
-        {
-            holdingItem = false;
-        }
     }
 }
