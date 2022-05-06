@@ -26,11 +26,13 @@ public class Connection : IEquatable<Connection>
 {
     public Device otherDevice;
     public ConnectorData connectorData;
+    public SocketType socketType;
 
-    public Connection(Device otherDevice, ConnectorData connectorData)
+    public Connection(Device otherDevice, ConnectorData connectorData, SocketType socketType)
     {
         this.otherDevice = otherDevice;
         this.connectorData = connectorData;
+        this.socketType = socketType;
     }
     public override string ToString()
     {
@@ -45,7 +47,7 @@ public class Connection : IEquatable<Connection>
             return false;
         }
 
-        return otherDevice.name == otherItem.otherDevice.name && connectorData == otherItem.connectorData;
+        return otherDevice.name == otherItem.otherDevice.name && connectorData == otherItem.connectorData && socketType == otherItem.socketType;
     }
     public bool Equals(Connection other)
     {
@@ -54,7 +56,7 @@ public class Connection : IEquatable<Connection>
             return false;
         }
 
-        return otherDevice.name == other.otherDevice.name && connectorData == other.connectorData;
+        return otherDevice.name == other.otherDevice.name && connectorData == other.connectorData && socketType == other.socketType;
     }
     public override int GetHashCode()
     {

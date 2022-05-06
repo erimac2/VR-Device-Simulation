@@ -17,6 +17,7 @@ public class Connector : MonoBehaviour
         if(isFullDevice)
         {
             connectedToDevice = GetComponentInParent<Device>();
+            socketType = SocketType.Both;
         }
         if (connectorData == null)
         {

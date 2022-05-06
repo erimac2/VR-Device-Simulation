@@ -88,8 +88,8 @@ public class Socket : XRSocketInteractor
         thisEnd = this.GetOldestInteractableSelected().transform.GetComponent<Connector>();
         if (thisEnd != null && thisEnd.isFullDevice)
         {
-            currentConnection = new Connection(thisEnd.connectedToDevice, connectorData);
-            currentOtherEndConnection = new Connection(device, connectorData);
+            currentConnection = new Connection(thisEnd.connectedToDevice, connectorData, SocketType.Both);
+            currentOtherEndConnection = new Connection(device, connectorData, SocketType.Both);
             device.connections.Add(currentConnection);
             thisEnd.connectedToDevice.connections.Add(currentOtherEndConnection);
             thisEnd.gameObject.layer = LayerMask.NameToLayer("Object Ignore Collision");
@@ -115,8 +115,8 @@ public class Socket : XRSocketInteractor
                     || thisEnd.socketType == SocketType.In && otherEnd.socketType == SocketType.Out
                     || thisEnd.socketType == SocketType.Out && otherEnd.socketType == SocketType.In)
                 {
-                    currentConnection = new Connection(otherEnd.connectedToDevice, connectorData);
-                    currentOtherEndConnection = new Connection(device, connectorData);
+                    currentConnection = new Connection(otherEnd.connectedToDevice, connectorData, otherEnd.socketType);
+                    currentOtherEndConnection = new Connection(device, connectorData, socketType);
                     device.connections.Add(currentConnection);
                     otherEnd.connectedToDevice.connections.Add(currentOtherEndConnection);
                 }

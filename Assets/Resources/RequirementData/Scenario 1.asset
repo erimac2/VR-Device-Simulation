@@ -19,6 +19,8 @@ MonoBehaviour:
     - otherDevice: {fileID: 6981695698024835669, guid: 8b739c12e12104f4089744047c525f59,
         type: 3}
       connectorData: {fileID: 11400000, guid: 27b9ca737edb85843b5fe696292c1952, type: 2}
+      socketType: 2
     - otherDevice: {fileID: 8100906875707567088, guid: 7909cb7443400004f886695fbf828c84,
         type: 3}
       connectorData: {fileID: 11400000, guid: 575c53cbcc7fcd046a7f7f39de9e74dd, type: 2}
+      socketType: 0
