@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e99fa4cdb57d064ab2453f9859d8d78, type: 3}
   m_Name: DP
   m_EditorClassIdentifier: 
-  Name: 
+  Name: DP
   Type: 
   Version: 
   HasPower: 0

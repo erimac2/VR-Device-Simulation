@@ -19,7 +19,6 @@ public class SoundManager : MonoBehaviour
         musicAudioSource.loop = true;
         musicAudioSource.Stop();
     }
-
     public void PlaySoundEffectAtPosition(AudioClip audioClip, Vector3 pos, float volumeScale = 1f)
     {
         soundEffectsAudioSource.transform.position = pos;

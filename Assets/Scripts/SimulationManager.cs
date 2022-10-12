@@ -39,12 +39,12 @@ public class SimulationManager : MonoBehaviour
         GameObject childItem;
         foreach (ConnectionRequirement connectionRequirement in requirementData.requiredConnections)
         {
-            print("bing");
             childDevice = Instantiate(devicePrefab, taskList.transform);
-            childDevice.transform.Find("Header").GetComponentInChildren<TextMeshProUGUI>().text = connectionRequirement.device.deviceName;
-            foreach(Connection connection in connectionRequirement.requiredConnections)
+            childDevice.transform.Find("Header").GetComponentInChildren<TextMeshProUGUI>().text = connectionRequirement.device.name;
+            //childDevice.transform.Find("Header").GetComponentInChildren<TextMeshProUGUI>().text = "Something";
+            //childDevice.transform.Find("Header").GetComponentInChildren<TextMeshProUGUI>().text = "Something";
+            foreach (Connection connection in connectionRequirement.requiredConnections)
             {
-                print("chilling");
                 childItem = Instantiate(itemPrefab, childDevice.transform.Find("Connections").transform);
                 childItem.GetComponentInChildren<TextMeshProUGUI>().text = connection.ToString();
             }

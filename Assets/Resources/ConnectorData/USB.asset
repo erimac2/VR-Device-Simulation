@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: USB
   Type: Type C
-  Version: 2.0
+  Version: 3.1
   HasPower: 0
   HasEthernet: 0

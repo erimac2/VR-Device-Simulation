@@ -98,18 +98,24 @@ public class Socket : XRSocketInteractor
         {
             thisEnd.connectedToDevice = device;
             thisEnd.socketType = socketType;
+            print(thisEnd.socketType);
             Transform parent = thisEnd.originalParent.transform;
             if (parent.childCount > 0)
             {
                 foreach (Transform child in parent)
                 {
                     otherEnd = child.GetComponent<Connector>();
+                    thisEnd.otherEnd = otherEnd;
                     otherEnd.otherEnd = thisEnd;
                 }
             }
             else
             {
+                print(thisEnd.socketType);
+                
                 otherEnd = thisEnd.otherEnd;
+                print(otherEnd.socketType);
+
                 if (thisEnd.socketType == SocketType.Both && (otherEnd.socketType == SocketType.Both || otherEnd.socketType == SocketType.In || otherEnd.socketType == SocketType.Out)
                     || (thisEnd.socketType == SocketType.Both || thisEnd.socketType == SocketType.In || thisEnd.socketType == SocketType.Out) && otherEnd.socketType == SocketType.Both
                     || thisEnd.socketType == SocketType.In && otherEnd.socketType == SocketType.Out
