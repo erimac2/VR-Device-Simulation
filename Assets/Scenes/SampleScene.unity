@@ -17140,6 +17140,7 @@ GameObject:
   - component: {fileID: 1884887772}
   - component: {fileID: 1884887771}
   - component: {fileID: 1884887770}
+  - component: {fileID: 1884887776}
   m_Layer: 6
   m_Name: Plug
   m_TagString: Untagged
@@ -17209,10 +17210,34 @@ MonoBehaviour:
       m_Calls: []
   m_HoverEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1884887776}
+        m_TargetAssemblyTypeName: Popup_text, Assembly-CSharp
+        m_MethodName: EnableText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   m_HoverExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1884887776}
+        m_TargetAssemblyTypeName: Popup_text, Assembly-CSharp
+        m_MethodName: DisableText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_FirstSelectEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -17221,7 +17246,19 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1884887776}
+        m_TargetAssemblyTypeName: Popup_text, Assembly-CSharp
+        m_MethodName: DisableText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
       m_Calls: []
@@ -17373,6 +17410,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1884887768}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1884887776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884887768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c21a93ff75597cd4eae1bc12904b566f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasPrefab: {fileID: 8875105910994133261, guid: a640a4c36fc12df4e831314a0954120d,
+    type: 3}
+  connectorData: {fileID: 11400000, guid: 27b9ca737edb85843b5fe696292c1952, type: 2}
 --- !u!4 &1898011177 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6475051436833747034, guid: f12c8507fe6b8244ca278dfac561312a,
@@ -21997,6 +22049,21 @@ PrefabInstance:
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 1502560766}
+    - target: {fileID: 6475051437636244276, guid: f12c8507fe6b8244ca278dfac561312a,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475051437636244276, guid: f12c8507fe6b8244ca278dfac561312a,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475051437636244276, guid: f12c8507fe6b8244ca278dfac561312a,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6475051437715700743, guid: f12c8507fe6b8244ca278dfac561312a,
         type: 3}
       propertyPath: socketType
