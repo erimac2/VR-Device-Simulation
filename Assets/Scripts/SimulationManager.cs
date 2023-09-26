@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -15,6 +16,8 @@ public class SimulationManager : MonoBehaviour
     [SerializeField] private RequirementData requirementData;
 
     [SerializeField] TextMeshProUGUI result;
+
+    List<GameObject> childItems;
 
     void Start()
     {
@@ -37,6 +40,7 @@ public class SimulationManager : MonoBehaviour
     {
         GameObject childDevice;
         GameObject childItem;
+        childItems = new List<GameObject>();
         foreach (ConnectionRequirement connectionRequirement in requirementData.requiredConnections)
         {
             childDevice = Instantiate(devicePrefab, taskList.transform);
@@ -47,6 +51,8 @@ public class SimulationManager : MonoBehaviour
             {
                 childItem = Instantiate(itemPrefab, childDevice.transform.Find("Connections").transform);
                 childItem.GetComponentInChildren<TextMeshProUGUI>().text = connection.ToString();
+                childItem.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+                childItems.Add(childItem);
             }
         }
     }
@@ -74,6 +80,16 @@ public class SimulationManager : MonoBehaviour
                         if (connectionRequirement.requiredConnections.Contains(connection))
                         {
                             count++;
+                            
+                            foreach (GameObject childitem in childItems)
+                            {
+                                if (childitem.GetComponentInChildren<TextMeshProUGUI>().text == connection.ToString())
+                                {
+                                    childitem.GetComponentInChildren<TextMeshProUGUI>().color = Color.green;
+                                    break;
+                                }
+                            }
+                            
                             Debug.LogWarning("Connection valid: " + connectionRequirement.device.name + " connected to " + connection.otherDevice.name + " via " + connection.connectorData.name);
                         }
                     }
