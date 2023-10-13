@@ -961,8 +961,8 @@ MonoBehaviour:
   m_SocketActive: 1
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
-  connectedSound: {fileID: 0}
-  connectorData: {fileID: 0}
+  connectedSound: {fileID: 8300000, guid: 1c44bbd4c42003c4994defa2f356c3a0, type: 3}
+  connectorData: {fileID: 11400000, guid: dd1d075b4b9286d4eae7f924c11d2e55, type: 2}
   socketType: 1
 --- !u!1 &8018389576164361024
 GameObject:
@@ -1454,9 +1454,9 @@ MonoBehaviour:
   m_SocketActive: 1
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
-  connectedSound: {fileID: 0}
-  connectorData: {fileID: 0}
-  socketType: 0
+  connectedSound: {fileID: 8300000, guid: 1c44bbd4c42003c4994defa2f356c3a0, type: 3}
+  connectorData: {fileID: 11400000, guid: 27b9ca737edb85843b5fe696292c1952, type: 2}
+  socketType: 1
 --- !u!1 &8018389576446860288
 GameObject:
   m_ObjectHideFlags: 0
@@ -1555,7 +1555,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HDMI OUT
+  m_text: HDMI ARC
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1641,7 +1641,7 @@ GameObject:
   - component: {fileID: 8018389576526996739}
   - component: {fileID: 8018389576526996738}
   m_Layer: 0
-  m_Name: Audio OUT
+  m_Name: 3.5 mm Audio OUT
   m_TagString: Socket
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1777,8 +1777,8 @@ MonoBehaviour:
   m_SocketActive: 1
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
-  connectedSound: {fileID: 0}
-  connectorData: {fileID: 0}
+  connectedSound: {fileID: 8300000, guid: 1c44bbd4c42003c4994defa2f356c3a0, type: 3}
+  connectorData: {fileID: 11400000, guid: d56eca7d13a41e546a7caf8d0ba85ce2, type: 2}
   socketType: 2
 --- !u!1 &8018389576566342160
 GameObject:
@@ -2100,9 +2100,9 @@ MonoBehaviour:
   m_SocketActive: 1
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
-  connectedSound: {fileID: 0}
-  connectorData: {fileID: 0}
-  socketType: 0
+  connectedSound: {fileID: 8300000, guid: 1c44bbd4c42003c4994defa2f356c3a0, type: 3}
+  connectorData: {fileID: 11400000, guid: b14fa78482579154db1bccb347aa3fc4, type: 2}
+  socketType: 1
 --- !u!1 &8018389576771709206
 GameObject:
   m_ObjectHideFlags: 0
@@ -2117,7 +2117,7 @@ GameObject:
   - component: {fileID: 8018389576771709205}
   - component: {fileID: 8018389576771709204}
   m_Layer: 0
-  m_Name: HDMI OUT
+  m_Name: HDMI ARC BOTH
   m_TagString: Socket
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2253,8 +2253,8 @@ MonoBehaviour:
   m_SocketActive: 1
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
-  connectedSound: {fileID: 0}
-  connectorData: {fileID: 0}
+  connectedSound: {fileID: 8300000, guid: 1c44bbd4c42003c4994defa2f356c3a0, type: 3}
+  connectorData: {fileID: 11400000, guid: 27b9ca737edb85843b5fe696292c1952, type: 2}
   socketType: 0
 --- !u!1 &8018389576825336184
 GameObject:
@@ -2406,8 +2406,8 @@ MonoBehaviour:
   m_SocketActive: 1
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
-  connectedSound: {fileID: 0}
-  connectorData: {fileID: 0}
+  connectedSound: {fileID: 8300000, guid: 1c44bbd4c42003c4994defa2f356c3a0, type: 3}
+  connectorData: {fileID: 11400000, guid: dd1d075b4b9286d4eae7f924c11d2e55, type: 2}
   socketType: 2
 --- !u!1 &8018389576831221918
 GameObject:
@@ -2559,9 +2559,9 @@ MonoBehaviour:
   m_SocketActive: 1
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
-  connectedSound: {fileID: 0}
-  connectorData: {fileID: 0}
-  socketType: 0
+  connectedSound: {fileID: 8300000, guid: 1c44bbd4c42003c4994defa2f356c3a0, type: 3}
+  connectorData: {fileID: 11400000, guid: aecb84992645c1b4da81df03961c96f6, type: 2}
+  socketType: 1
 --- !u!1 &8018389576889487919
 GameObject:
   m_ObjectHideFlags: 0
@@ -2712,9 +2712,9 @@ MonoBehaviour:
   m_SocketActive: 1
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
-  connectedSound: {fileID: 0}
-  connectorData: {fileID: 0}
-  socketType: 0
+  connectedSound: {fileID: 8300000, guid: 1c44bbd4c42003c4994defa2f356c3a0, type: 3}
+  connectorData: {fileID: 11400000, guid: 27b9ca737edb85843b5fe696292c1952, type: 2}
+  socketType: 1
 --- !u!1 &8018389576976714222
 GameObject:
   m_ObjectHideFlags: 0
@@ -2865,8 +2865,8 @@ MonoBehaviour:
   m_SocketActive: 1
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
-  connectedSound: {fileID: 0}
-  connectorData: {fileID: 0}
+  connectedSound: {fileID: 8300000, guid: 1c44bbd4c42003c4994defa2f356c3a0, type: 3}
+  connectorData: {fileID: 11400000, guid: 95bfd63c34f96484aafda52a6e1b3113, type: 2}
   socketType: 2
 --- !u!1 &8018389577299640996
 GameObject:
@@ -2966,7 +2966,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DC
+  m_text: Power
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3698,8 +3698,8 @@ MonoBehaviour:
   m_SocketActive: 1
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
-  connectedSound: {fileID: 0}
-  connectorData: {fileID: 0}
+  connectedSound: {fileID: 8300000, guid: 1c44bbd4c42003c4994defa2f356c3a0, type: 3}
+  connectorData: {fileID: 11400000, guid: be1dec6f5fa7ddc43865981c41f8bd31, type: 2}
   socketType: 1
 --- !u!1 &8018389577677994910
 GameObject:
@@ -3885,7 +3885,7 @@ GameObject:
   - component: {fileID: 8018389577783723913}
   - component: {fileID: 8018389577783723912}
   m_Layer: 0
-  m_Name: DC IN
+  m_Name: IEC C13 IN
   m_TagString: Socket
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4021,9 +4021,9 @@ MonoBehaviour:
   m_SocketActive: 1
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
-  connectedSound: {fileID: 0}
-  connectorData: {fileID: 0}
-  socketType: 0
+  connectedSound: {fileID: 8300000, guid: 1c44bbd4c42003c4994defa2f356c3a0, type: 3}
+  connectorData: {fileID: 11400000, guid: bbb8d63d8ff7e0842bf271ebe4aa2cad, type: 2}
+  socketType: 1
 --- !u!1 &8018389577785248835
 GameObject:
   m_ObjectHideFlags: 0
@@ -4174,6 +4174,6 @@ MonoBehaviour:
   m_SocketActive: 1
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
-  connectedSound: {fileID: 0}
-  connectorData: {fileID: 0}
-  socketType: 0
+  connectedSound: {fileID: 8300000, guid: 1c44bbd4c42003c4994defa2f356c3a0, type: 3}
+  connectorData: {fileID: 11400000, guid: 27b9ca737edb85843b5fe696292c1952, type: 2}
+  socketType: 1

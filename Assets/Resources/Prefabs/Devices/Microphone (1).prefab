@@ -261,8 +261,8 @@ MonoBehaviour:
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
   connectedSound: {fileID: 0}
-  connectorData: {fileID: 0}
-  socketType: 0
+  connectorData: {fileID: 11400000, guid: 5d1a61577f8b04a4b8c6bb4061542290, type: 2}
+  socketType: 2
 --- !u!1 &2322505603815773936
 GameObject:
   m_ObjectHideFlags: 0

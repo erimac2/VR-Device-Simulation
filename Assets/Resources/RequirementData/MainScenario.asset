@@ -19,14 +19,14 @@ MonoBehaviour:
     - otherDevice: {fileID: 2563413534957710814, guid: 8ead1c9558c4e8e4c87ee2fe00617832,
         type: 3}
       connectorData: {fileID: 11400000, guid: 27b9ca737edb85843b5fe696292c1952, type: 2}
-      socketType: 2
+      socketType: 1
     - otherDevice: {fileID: 4103852475142950841, guid: 930431c4334ceb64791c5d7650bdd9d7,
         type: 3}
       connectorData: {fileID: 11400000, guid: 27b9ca737edb85843b5fe696292c1952, type: 2}
       socketType: 1
     - otherDevice: {fileID: 5846836294740388034, guid: 8d4a585eebfa24144b1cae113490cd23,
         type: 3}
-      connectorData: {fileID: 11400000, guid: 623db76236ffe7c459a8f1c6f60918b5, type: 2}
+      connectorData: {fileID: 11400000, guid: bbb8d63d8ff7e0842bf271ebe4aa2cad, type: 2}
       socketType: 2
     - otherDevice: {fileID: -1714344815640489559, guid: 3fb7499b57672334d9213f906caed6f3,
         type: 3}
@@ -41,7 +41,7 @@ MonoBehaviour:
     requiredConnections:
     - otherDevice: {fileID: 5846836294740388034, guid: 8d4a585eebfa24144b1cae113490cd23,
         type: 3}
-      connectorData: {fileID: 11400000, guid: 623db76236ffe7c459a8f1c6f60918b5, type: 2}
+      connectorData: {fileID: 11400000, guid: bbb8d63d8ff7e0842bf271ebe4aa2cad, type: 2}
       socketType: 2
     - otherDevice: {fileID: 6475051436834013669, guid: f12c8507fe6b8244ca278dfac561312a,
         type: 3}
@@ -56,7 +56,7 @@ MonoBehaviour:
       socketType: 2
     - otherDevice: {fileID: 5846836294740388034, guid: 8d4a585eebfa24144b1cae113490cd23,
         type: 3}
-      connectorData: {fileID: 11400000, guid: 623db76236ffe7c459a8f1c6f60918b5, type: 2}
+      connectorData: {fileID: 11400000, guid: bbb8d63d8ff7e0842bf271ebe4aa2cad, type: 2}
       socketType: 2
   - device: {fileID: 201791146650265185, guid: 95df9c6b4d5f4e44e9311625b22300b2, type: 3}
     requiredConnections:
@@ -66,5 +66,5 @@ MonoBehaviour:
       socketType: 2
     - otherDevice: {fileID: 5846836294740388034, guid: 8d4a585eebfa24144b1cae113490cd23,
         type: 3}
-      connectorData: {fileID: 11400000, guid: 623db76236ffe7c459a8f1c6f60918b5, type: 2}
+      connectorData: {fileID: 11400000, guid: bbb8d63d8ff7e0842bf271ebe4aa2cad, type: 2}
       socketType: 2

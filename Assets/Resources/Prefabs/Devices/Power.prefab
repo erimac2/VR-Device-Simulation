@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5846836293442967102}
   - component: {fileID: 5846836293442967103}
   m_Layer: 0
-  m_Name: DC (2)
+  m_Name: Power socket (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
   connectedSound: {fileID: 0}
-  connectorData: {fileID: 0}
+  connectorData: {fileID: 11400000, guid: 2362f00fbe3edf848a7a5ae9d168aa5c, type: 2}
   socketType: 2
 --- !u!1 &5846836294536565936
 GameObject:
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 5846836294536565949}
   - component: {fileID: 5846836294536565938}
   m_Layer: 0
-  m_Name: DC (1)
+  m_Name: Power socket (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
   connectedSound: {fileID: 0}
-  connectorData: {fileID: 0}
+  connectorData: {fileID: 11400000, guid: 2362f00fbe3edf848a7a5ae9d168aa5c, type: 2}
   socketType: 2
 --- !u!1 &5846836294740388032
 GameObject:
@@ -325,7 +325,7 @@ GameObject:
   - component: {fileID: 5846836295240539468}
   - component: {fileID: 5846836295240539469}
   m_Layer: 0
-  m_Name: DC
+  m_Name: Power socket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -409,8 +409,8 @@ MonoBehaviour:
   m_SocketActive: 1
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
-  connectedSound: {fileID: 0}
-  connectorData: {fileID: 0}
+  connectedSound: {fileID: 8300000, guid: 1c44bbd4c42003c4994defa2f356c3a0, type: 3}
+  connectorData: {fileID: 11400000, guid: 2362f00fbe3edf848a7a5ae9d168aa5c, type: 2}
   socketType: 2
 --- !u!1 &5846836295372715424
 GameObject:
@@ -424,7 +424,7 @@ GameObject:
   - component: {fileID: 5846836295372715437}
   - component: {fileID: 5846836295372715426}
   m_Layer: 0
-  m_Name: DC (3)
+  m_Name: Power socket (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -509,5 +509,5 @@ MonoBehaviour:
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
   connectedSound: {fileID: 0}
-  connectorData: {fileID: 0}
+  connectorData: {fileID: 11400000, guid: 2362f00fbe3edf848a7a5ae9d168aa5c, type: 2}
   socketType: 2
