@@ -1,11 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using Unity.XR.CoreUtils;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class SimulationManager : MonoBehaviour
 {
@@ -55,6 +58,9 @@ public class SimulationManager : MonoBehaviour
             }
         }
     }
+
+    
+
     public void CheckResults()
     {
         int solvedCount = 0;
