@@ -19,7 +19,15 @@ public class SimulationManager : MonoBehaviour
     [SerializeField] private RequirementData requirementData;
 
     [SerializeField] TextMeshProUGUI result;
-    List<GameObject> tasks;
+    List<GameObject> allTasks;
+    List<DeviceWithTasks> allDevices;    //used to differentiate between identical tasks on different devices
+
+
+    struct DeviceWithTasks
+    {
+        public Device device;
+        public List<GameObject> deviceTasks;
+    }
 
     void Start()
     {
@@ -42,11 +50,13 @@ public class SimulationManager : MonoBehaviour
     {
         GameObject childDevice;
         GameObject childItem;
-        tasks = new List<GameObject>();
+        allDevices = new List<DeviceWithTasks>();
         foreach (ConnectionRequirement connectionRequirement in requirementData.requiredConnections)
         {
             childDevice = Instantiate(devicePrefab, taskList.transform);
             childDevice.transform.Find("Header").GetComponentInChildren<TextMeshProUGUI>().text = connectionRequirement.device.name;
+            List<GameObject> tasks = new List<GameObject>();
+
             //childDevice.transform.Find("Header").GetComponentInChildren<TextMeshProUGUI>().text = "Something";
             //childDevice.transform.Find("Header").GetComponentInChildren<TextMeshProUGUI>().text = "Something";
             foreach (Connection connection in connectionRequirement.requiredConnections)
@@ -56,6 +66,7 @@ public class SimulationManager : MonoBehaviour
                 childItem.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
                 tasks.Add(childItem);
             }
+            allDevices.Add(new DeviceWithTasks { device = connectionRequirement.device, deviceTasks = tasks });
         }
     }
 
@@ -86,11 +97,19 @@ public class SimulationManager : MonoBehaviour
                         {
                             count++;
                             
-                            foreach (GameObject task in tasks)
+                            foreach (DeviceWithTasks checkDevice in allDevices)
                             {
-                                if (task.GetComponentInChildren<TextMeshProUGUI>().text == connection.ToString())
+                                if (checkDevice.device.name == connectionRequirement.device.name)
                                 {
-                                    task.GetComponentInChildren<TextMeshProUGUI>().color = Color.green;
+                                    Debug.LogWarning("Found device");
+                                    foreach (GameObject task in checkDevice.deviceTasks)
+                                    {
+                                        if (task.GetComponentInChildren<TextMeshProUGUI>().text == connection.ToString())
+                                        {
+                                            task.GetComponentInChildren<TextMeshProUGUI>().color = Color.green;
+                                            break;
+                                        }
+                                    }
                                     break;
                                 }
                             }

@@ -66,5 +66,5 @@ MonoBehaviour:
       socketType: 2
     - otherDevice: {fileID: 5846836294740388034, guid: 8d4a585eebfa24144b1cae113490cd23,
         type: 3}
-      connectorData: {fileID: 11400000, guid: bbb8d63d8ff7e0842bf271ebe4aa2cad, type: 2}
+      connectorData: {fileID: 11400000, guid: 623db76236ffe7c459a8f1c6f60918b5, type: 2}
       socketType: 2
