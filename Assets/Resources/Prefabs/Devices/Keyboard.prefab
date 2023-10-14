@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b65cd9ea14267ff459e2272e8808ca1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deviceName: 
+  deviceName: Keyboard
   connections: []
   connectedCount: 0
 --- !u!1 &7247472933205770812
@@ -10733,7 +10733,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 2
   m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:

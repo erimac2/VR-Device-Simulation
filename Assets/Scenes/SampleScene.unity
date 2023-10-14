@@ -548,7 +548,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DC
+  m_text: IEC C13
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1130,7 +1130,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DC
+  m_text: Power plug
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2372,7 +2372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8562f8385ea6b754fa69ecae3a5e9bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectorData: {fileID: 11400000, guid: 623db76236ffe7c459a8f1c6f60918b5, type: 2}
+  connectorData: {fileID: 11400000, guid: bbb8d63d8ff7e0842bf271ebe4aa2cad, type: 2}
   originalParent: {fileID: 0}
   otherEnd: {fileID: 0}
   connectedToDevice: {fileID: 0}
@@ -5192,7 +5192,7 @@ GameObject:
   - component: {fileID: 550558805}
   - component: {fileID: 550558804}
   m_Layer: 0
-  m_Name: DC (1)
+  m_Name: IEC C13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6382,7 +6382,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DC
+  m_text: IEC C13
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6633,7 +6633,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DC
+  m_text: Power plug
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6796,7 +6796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8562f8385ea6b754fa69ecae3a5e9bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectorData: {fileID: 11400000, guid: 623db76236ffe7c459a8f1c6f60918b5, type: 2}
+  connectorData: {fileID: 11400000, guid: 2362f00fbe3edf848a7a5ae9d168aa5c, type: 2}
   originalParent: {fileID: 0}
   otherEnd: {fileID: 0}
   connectedToDevice: {fileID: 0}
@@ -7009,7 +7009,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltipPrefab: {fileID: 295982981267679158, guid: 1b2062b113dd6bd4ca56405b88a9b8c9,
     type: 3}
-  connectorData: {fileID: 11400000, guid: 623db76236ffe7c459a8f1c6f60918b5, type: 2}
+  connectorData: {fileID: 11400000, guid: 2362f00fbe3edf848a7a5ae9d168aa5c, type: 2}
 --- !u!1 &708541168
 GameObject:
   m_ObjectHideFlags: 0
@@ -7094,7 +7094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8562f8385ea6b754fa69ecae3a5e9bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectorData: {fileID: 11400000, guid: 623db76236ffe7c459a8f1c6f60918b5, type: 2}
+  connectorData: {fileID: 11400000, guid: bbb8d63d8ff7e0842bf271ebe4aa2cad, type: 2}
   originalParent: {fileID: 0}
   otherEnd: {fileID: 0}
   connectedToDevice: {fileID: 0}
@@ -7307,7 +7307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltipPrefab: {fileID: 295982981267679158, guid: 1b2062b113dd6bd4ca56405b88a9b8c9,
     type: 3}
-  connectorData: {fileID: 11400000, guid: 623db76236ffe7c459a8f1c6f60918b5, type: 2}
+  connectorData: {fileID: 11400000, guid: bbb8d63d8ff7e0842bf271ebe4aa2cad, type: 2}
 --- !u!65 &806924847
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8886,7 +8886,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DC
+  m_text: Power plug
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9056,7 +9056,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DC
+  m_text: Power plug
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -13295,7 +13295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8562f8385ea6b754fa69ecae3a5e9bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectorData: {fileID: 11400000, guid: 623db76236ffe7c459a8f1c6f60918b5, type: 2}
+  connectorData: {fileID: 11400000, guid: 2362f00fbe3edf848a7a5ae9d168aa5c, type: 2}
   originalParent: {fileID: 0}
   otherEnd: {fileID: 0}
   connectedToDevice: {fileID: 0}
@@ -14537,7 +14537,7 @@ GameObject:
   - component: {fileID: 1764000431}
   - component: {fileID: 1764000430}
   m_Layer: 0
-  m_Name: DC (3)
+  m_Name: IEC C13 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14551,7 +14551,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1764000428}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.9060001, y: -0.82, z: 1.3202}
+  m_LocalPosition: {x: 2.9060001, y: -0.82, z: 1.2861}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 260876448}
@@ -15279,7 +15279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8562f8385ea6b754fa69ecae3a5e9bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectorData: {fileID: 11400000, guid: 623db76236ffe7c459a8f1c6f60918b5, type: 2}
+  connectorData: {fileID: 11400000, guid: bbb8d63d8ff7e0842bf271ebe4aa2cad, type: 2}
   originalParent: {fileID: 0}
   otherEnd: {fileID: 0}
   connectedToDevice: {fileID: 0}
@@ -15492,7 +15492,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltipPrefab: {fileID: 295982981267679158, guid: 1b2062b113dd6bd4ca56405b88a9b8c9,
     type: 3}
-  connectorData: {fileID: 11400000, guid: 623db76236ffe7c459a8f1c6f60918b5, type: 2}
+  connectorData: {fileID: 11400000, guid: bbb8d63d8ff7e0842bf271ebe4aa2cad, type: 2}
 --- !u!1 &1862706654
 GameObject:
   m_ObjectHideFlags: 0
@@ -15505,7 +15505,7 @@ GameObject:
   - component: {fileID: 1862706657}
   - component: {fileID: 1862706656}
   m_Layer: 0
-  m_Name: DC (2)
+  m_Name: IEC C13 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16524,7 +16524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8562f8385ea6b754fa69ecae3a5e9bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectorData: {fileID: 11400000, guid: 623db76236ffe7c459a8f1c6f60918b5, type: 2}
+  connectorData: {fileID: 11400000, guid: 2362f00fbe3edf848a7a5ae9d168aa5c, type: 2}
   originalParent: {fileID: 0}
   otherEnd: {fileID: 0}
   connectedToDevice: {fileID: 0}
@@ -16737,7 +16737,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltipPrefab: {fileID: 295982981267679158, guid: 1b2062b113dd6bd4ca56405b88a9b8c9,
     type: 3}
-  connectorData: {fileID: 11400000, guid: 623db76236ffe7c459a8f1c6f60918b5, type: 2}
+  connectorData: {fileID: 11400000, guid: 2362f00fbe3edf848a7a5ae9d168aa5c, type: 2}
 --- !u!1 &2106310972
 GameObject:
   m_ObjectHideFlags: 0
@@ -16918,7 +16918,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DC
+  m_text: IEC C13
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -17487,7 +17487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8562f8385ea6b754fa69ecae3a5e9bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectorData: {fileID: 11400000, guid: 623db76236ffe7c459a8f1c6f60918b5, type: 2}
+  connectorData: {fileID: 11400000, guid: 2362f00fbe3edf848a7a5ae9d168aa5c, type: 2}
   originalParent: {fileID: 0}
   otherEnd: {fileID: 0}
   connectedToDevice: {fileID: 0}
@@ -17700,7 +17700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltipPrefab: {fileID: 295982981267679158, guid: 1b2062b113dd6bd4ca56405b88a9b8c9,
     type: 3}
-  connectorData: {fileID: 11400000, guid: 623db76236ffe7c459a8f1c6f60918b5, type: 2}
+  connectorData: {fileID: 11400000, guid: 2362f00fbe3edf848a7a5ae9d168aa5c, type: 2}
 --- !u!1 &2140019370
 GameObject:
   m_ObjectHideFlags: 0
@@ -19524,7 +19524,7 @@ PrefabInstance:
         type: 3}
       propertyPath: connectorData
       value: 
-      objectReference: {fileID: 11400000, guid: 623db76236ffe7c459a8f1c6f60918b5,
+      objectReference: {fileID: 11400000, guid: bbb8d63d8ff7e0842bf271ebe4aa2cad,
         type: 2}
     - target: {fileID: 4103852475014521781, guid: 930431c4334ceb64791c5d7650bdd9d7,
         type: 3}
@@ -20318,7 +20318,7 @@ PrefabInstance:
     - target: {fileID: 6475051436878395186, guid: f12c8507fe6b8244ca278dfac561312a,
         type: 3}
       propertyPath: socketType
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6475051436878395186, guid: f12c8507fe6b8244ca278dfac561312a,
         type: 3}
@@ -20388,7 +20388,7 @@ PrefabInstance:
         type: 3}
       propertyPath: connectorData
       value: 
-      objectReference: {fileID: 11400000, guid: 623db76236ffe7c459a8f1c6f60918b5,
+      objectReference: {fileID: 11400000, guid: bbb8d63d8ff7e0842bf271ebe4aa2cad,
         type: 2}
     - target: {fileID: 6475051437715700743, guid: f12c8507fe6b8244ca278dfac561312a,
         type: 3}
@@ -20525,6 +20525,11 @@ PrefabInstance:
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 1502560766}
+    - target: {fileID: 6900910174881691578, guid: 44e89abcec646fd4d9e1e62706e5f258,
+        type: 3}
+      propertyPath: m_Name
+      value: 3.5 mm Audio
+      objectReference: {fileID: 0}
     - target: {fileID: 6900910175250503072, guid: 44e89abcec646fd4d9e1e62706e5f258,
         type: 3}
       propertyPath: socketType
@@ -21025,6 +21030,11 @@ PrefabInstance:
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 1502560766}
+    - target: {fileID: 7247472933498893949, guid: 3fb7499b57672334d9213f906caed6f3,
+        type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7247472933498893942, guid: 3fb7499b57672334d9213f906caed6f3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3fb7499b57672334d9213f906caed6f3, type: 3}
@@ -21396,7 +21406,7 @@ PrefabInstance:
     - target: {fileID: 8018389576771709204, guid: 8ead1c9558c4e8e4c87ee2fe00617832,
         type: 3}
       propertyPath: socketType
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8018389576771709204, guid: 8ead1c9558c4e8e4c87ee2fe00617832,
         type: 3}
@@ -21513,7 +21523,7 @@ PrefabInstance:
         type: 3}
       propertyPath: connectorData
       value: 
-      objectReference: {fileID: 11400000, guid: 623db76236ffe7c459a8f1c6f60918b5,
+      objectReference: {fileID: 11400000, guid: bbb8d63d8ff7e0842bf271ebe4aa2cad,
         type: 2}
     - target: {fileID: 8018389577783723912, guid: 8ead1c9558c4e8e4c87ee2fe00617832,
         type: 3}

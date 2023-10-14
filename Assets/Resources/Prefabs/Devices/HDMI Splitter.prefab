@@ -98,7 +98,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HDMI IN
+  m_text: HDMI OUT
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -438,7 +438,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HDMI IN
+  m_text: HDMI OUT
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -661,8 +661,8 @@ MonoBehaviour:
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
   connectedSound: {fileID: 8300000, guid: 1c44bbd4c42003c4994defa2f356c3a0, type: 3}
-  connectorData: {fileID: 0}
-  socketType: 0
+  connectorData: {fileID: 11400000, guid: 27b9ca737edb85843b5fe696292c1952, type: 2}
+  socketType: 2
 --- !u!1 &6981695698024835674
 GameObject:
   m_ObjectHideFlags: 0
@@ -1088,8 +1088,8 @@ MonoBehaviour:
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
   connectedSound: {fileID: 8300000, guid: 1c44bbd4c42003c4994defa2f356c3a0, type: 3}
-  connectorData: {fileID: 0}
-  socketType: 0
+  connectorData: {fileID: 11400000, guid: 27b9ca737edb85843b5fe696292c1952, type: 2}
+  socketType: 2
 --- !u!1 &6981695698608144052
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,7 +1188,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HDMI IN
+  m_text: HDMI OUT
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1411,8 +1411,8 @@ MonoBehaviour:
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
   connectedSound: {fileID: 8300000, guid: 1c44bbd4c42003c4994defa2f356c3a0, type: 3}
-  connectorData: {fileID: 0}
-  socketType: 0
+  connectorData: {fileID: 11400000, guid: 623db76236ffe7c459a8f1c6f60918b5, type: 2}
+  socketType: 1
 --- !u!1 &6981695698900790768
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,7 +1511,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HDMI IN
+  m_text: HDMI OUT
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1734,8 +1734,8 @@ MonoBehaviour:
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
   connectedSound: {fileID: 8300000, guid: 1c44bbd4c42003c4994defa2f356c3a0, type: 3}
-  connectorData: {fileID: 0}
-  socketType: 0
+  connectorData: {fileID: 11400000, guid: 27b9ca737edb85843b5fe696292c1952, type: 2}
+  socketType: 1
 --- !u!1 &6981695699308959331
 GameObject:
   m_ObjectHideFlags: 0
@@ -2057,8 +2057,8 @@ MonoBehaviour:
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
   connectedSound: {fileID: 8300000, guid: 1c44bbd4c42003c4994defa2f356c3a0, type: 3}
-  connectorData: {fileID: 0}
-  socketType: 0
+  connectorData: {fileID: 11400000, guid: 27b9ca737edb85843b5fe696292c1952, type: 2}
+  socketType: 2
 --- !u!1 &6981695699433484683
 GameObject:
   m_ObjectHideFlags: 0
@@ -2210,5 +2210,5 @@ MonoBehaviour:
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
   connectedSound: {fileID: 8300000, guid: 1c44bbd4c42003c4994defa2f356c3a0, type: 3}
-  connectorData: {fileID: 0}
-  socketType: 0
+  connectorData: {fileID: 11400000, guid: 27b9ca737edb85843b5fe696292c1952, type: 2}
+  socketType: 2
