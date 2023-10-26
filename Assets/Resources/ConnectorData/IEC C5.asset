@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e99fa4cdb57d064ab2453f9859d8d78, type: 3}
-  m_Name: Audio
+  m_Name: IEC C5
   m_EditorClassIdentifier: 
-  Name: Audio
+  Name: IEC C5
   Type: 
   Version: 
   HasPower: 0
