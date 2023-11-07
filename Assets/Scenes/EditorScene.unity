@@ -2826,6 +2826,7 @@ MonoBehaviour:
   - {fileID: 4103852475142950840, guid: 930431c4334ceb64791c5d7650bdd9d7, type: 3}
   - {fileID: 6475051436834013670, guid: f12c8507fe6b8244ca278dfac561312a, type: 3}
   - {fileID: 2563413534957710809, guid: 8ead1c9558c4e8e4c87ee2fe00617832, type: 3}
+  controller: {fileID: 812158570}
 --- !u!114 &362324217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4055,6 +4056,7 @@ MonoBehaviour:
   objectPrefabs:
   - {fileID: 7911004367817538595, guid: 8182fa7f206b3bc4583d95cd274aea0c, type: 3}
   - {fileID: 4307824869056325160, guid: 1f91b2882425b8c42ac017c616cae672, type: 3}
+  controller: {fileID: 812158570}
 --- !u!1 &529871883
 GameObject:
   m_ObjectHideFlags: 0
@@ -13721,7 +13723,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1896762970
 RectTransform:
   m_ObjectHideFlags: 0

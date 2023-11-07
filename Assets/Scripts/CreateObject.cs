@@ -2,16 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
+using UnityEngine.XR;
 
 public class CreateObject : MonoBehaviour
 {
     [SerializeField] private GameObject[] objectPrefabs;
+    [SerializeField] private GameObject controller;
     private int selectedPrefabIndex = -1;
     private int objectIndex = 0;
+    private bool placing = false;
+    private GameObject obj;
+    private Color oldColor;
     // Start is called before the first frame update
     void Start()
     {
-        //objectPrefab = 
+
     }
     private GameObject SelectedPrefab
     {
@@ -26,7 +32,7 @@ public class CreateObject : MonoBehaviour
     {
         if (SelectedPrefab != null)
         {
-            GameObject obj = Instantiate(SelectedPrefab, this.transform.position, this.transform.rotation);
+            obj = Instantiate(SelectedPrefab, controller.transform.position, controller.transform.rotation);
             string prefabPath = AssetDatabase.GetAssetPath(SelectedPrefab);
 
             Debug.Log("Prefab path: " + prefabPath);
@@ -40,11 +46,50 @@ public class CreateObject : MonoBehaviour
             {
                 ObjectPrefabPaths.paths.Add(obj.name, prefabPath);
             }
+            placing = true;
+            var components = obj.GetComponentsInChildren<Rigidbody>();
+            foreach (var component in components)
+            {
+                component.useGravity = false; // disable gravity while placing objects
+            }
+            //oldColor = obj.GetComponent<Renderer>().material.
         }
     }
     public void SelectPrefab(int index)
     {
         selectedPrefabIndex = index;
+    }
+    private void FixedUpdate()
+    {
+        if (placing)
+        {
+            //obj.GetComponent<Renderer>().material.SetColor("_Color", new Color(oldColor.r, oldColor.g, oldColor.b, 0f));
+            bool triggerValue;
+            InputDevices.GetDeviceAtXRNode(XRNode.RightHand).TryGetFeatureValue(CommonUsages.triggerButton,
+                              out triggerValue);
+            bool cancelValue;
+            InputDevices.GetDeviceAtXRNode(XRNode.LeftHand).TryGetFeatureValue(CommonUsages.triggerButton,
+                  out cancelValue);
+            if (triggerValue)
+            {
+                placing = false;
+                var components = obj.GetComponentsInChildren<Rigidbody>();
+                foreach (var component in components)
+                {
+                    component.useGravity = true; // restore gravity for placed obejcts
+                }
+                //obj.GetComponent<Renderer>().material.SetColor("_Color", new Color(oldColor.r, oldColor.g, oldColor.b, oldColor.a));
+            }
+            else
+            {
+                obj.transform.SetPositionAndRotation(controller.transform.position, controller.transform.rotation);
+            }
+            if (cancelValue)
+            {
+                placing = false;
+                Destroy(obj);
+            }
+        }
     }
 }
 
