@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -44,8 +45,11 @@ public class LevelManager : MonoBehaviour
         File.AppendAllText(path, "\n]\n}");
         Debug.Log("Saved to: " + path);
     }
-    public void Load()
+    public static void Load() // sceneName - scene, where objects should be loaded
     {
+        //SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
+        //Debug.Log(SceneManager.GetActiveScene().name);
+        string path = Application.persistentDataPath + "/LevelData.json";
         if (File.Exists(path))
         {
             string data = File.ReadAllText(path);
