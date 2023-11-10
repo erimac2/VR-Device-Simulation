@@ -10616,7 +10616,7 @@ GameObject:
   - component: {fileID: 7247472933498893948}
   - component: {fileID: 7247472933498893942}
   m_Layer: 6
-  m_Name: Plug
+  m_Name: USB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
