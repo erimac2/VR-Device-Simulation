@@ -32,14 +32,15 @@ public class EditManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        //declare possible opposite connections.
         possibleConnections = new Dictionary<string, string>();
         possibleConnections.Add("IN", "OUT");
         possibleConnections.Add("USB", "USB");
         possibleConnections.Add("3.5 mm Audio", "3.5 mm Audio");
 
-        
 
+        allDevices = new List<DeviceWithTasks>();
         requirementData = new RequirementData();
         requirementData.requiredConnections = new List<ConnectionRequirement>();
         fillDeviceDropDown();    
@@ -132,7 +133,11 @@ public class EditManager : MonoBehaviour
                 Connection connection = new Connection(device1, connector, socketType);
                 requirement.requiredConnections.Add(connection);
             }
-            requirementData.requiredConnections.Add(requirement);
+
+            if (requirement.requiredConnections.Count > 0)
+            {
+                requirementData.requiredConnections.Add(requirement);
+            }
         }
         spawnedGameObjects.Add(newObject);
         FillTaskList();
@@ -150,19 +155,21 @@ public class EditManager : MonoBehaviour
             {
                 if (oldDevicePort.name.Contains(possibleConnection.Key))
                 {
-                    if (spawnedDevicePort.name.Contains(possibleConnection.Value))
+                    string newName = spawnedDevicePort.name.Replace(possibleConnection.Key, string.Empty);
+
+                    if (spawnedDevicePort.name.Contains(possibleConnection.Value) && spawnedDevicePort.name.Contains(newName))
                     {
                         return true;
                     }
-                    else return false;
                 }
                 else if (oldDevicePort.name.Contains(possibleConnection.Value)) 
                 {
-                    if (spawnedDevicePort.name.Contains(possibleConnection.Key))
+                    string newName = oldDevicePort.name.Replace(possibleConnection.Value, string.Empty);
+
+                    if (spawnedDevicePort.name.Contains(possibleConnection.Key) && spawnedDevicePort.name.Contains(newName))
                     {
                         return true;
                     }
-                    else return false;
                 }
             }
         }
@@ -173,9 +180,14 @@ public class EditManager : MonoBehaviour
     {
         GameObject childDevice;
         GameObject childItem;
-        allDevices = new List<DeviceWithTasks>();
+
+        for (var i = taskList.transform.childCount - 1; i >= 0; i--)
+        {
+            Object.Destroy(taskList.transform.GetChild(i).gameObject);
+        }
         foreach (ConnectionRequirement connectionRequirement in requirementData.requiredConnections)
         {
+
             childDevice = Instantiate(devicePrefab, taskList.transform);
             childDevice.transform.Find("Header").GetComponentInChildren<TextMeshProUGUI>().text = connectionRequirement.device.name;
             List<GameObject> tasks = new List<GameObject>();
