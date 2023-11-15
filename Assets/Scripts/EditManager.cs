@@ -137,11 +137,10 @@ public class EditManager : MonoBehaviour
             if (requirement.requiredConnections.Count > 0)
             {
                 requirementData.requiredConnections.Add(requirement);
+                FillTaskList(requirement);
             }
         }
         spawnedGameObjects.Add(newObject);
-        FillTaskList();
-        //requirementData.requiredConnections.Add();
     }
     
     private bool isConnectionPossible(GameObject gameObjectInScene, GameObject spawnedDevicePort)
@@ -155,7 +154,7 @@ public class EditManager : MonoBehaviour
             {
                 if (oldDevicePort.name.Contains(possibleConnection.Key))
                 {
-                    string newName = spawnedDevicePort.name.Replace(possibleConnection.Key, string.Empty);
+                    string newName = spawnedDevicePort.name.Replace(possibleConnection.Key, "");
 
                     if (spawnedDevicePort.name.Contains(possibleConnection.Value) && spawnedDevicePort.name.Contains(newName))
                     {
@@ -164,7 +163,7 @@ public class EditManager : MonoBehaviour
                 }
                 else if (oldDevicePort.name.Contains(possibleConnection.Value)) 
                 {
-                    string newName = oldDevicePort.name.Replace(possibleConnection.Value, string.Empty);
+                    string newName = oldDevicePort.name.Replace(possibleConnection.Value, "");
 
                     if (spawnedDevicePort.name.Contains(possibleConnection.Key) && spawnedDevicePort.name.Contains(newName))
                     {
@@ -176,33 +175,68 @@ public class EditManager : MonoBehaviour
         return false;
     }
 
-    private void FillTaskList()
+    private void FillTaskList(ConnectionRequirement connectionRequirement)
     {
         GameObject childDevice;
         GameObject childItem;
 
-        for (var i = taskList.transform.childCount - 1; i >= 0; i--)
-        {
-            Object.Destroy(taskList.transform.GetChild(i).gameObject);
-        }
-        foreach (ConnectionRequirement connectionRequirement in requirementData.requiredConnections)
+
+        //fix later:
+        childDevice = Instantiate(devicePrefab, taskList.transform);
+        childDevice.transform.Find("Header").GetComponentInChildren<TextMeshProUGUI>().text = connectionRequirement.device.name;
+        List<GameObject> tasks = new List<GameObject>();
+
+        //childDevice.transform.Find("Header").GetComponentInChildren<TextMeshProUGUI>().text = "Something";
+        //childDevice.transform.Find("Header").GetComponentInChildren<TextMeshProUGUI>().text = "Something";
+        
+        DeviceWithTasks deviceWithTasks = new DeviceWithTasks();
+        deviceWithTasks.device = connectionRequirement.device;
+        deviceWithTasks.deviceTasks = new List<GameObject>();
+
+        foreach (Connection connection in connectionRequirement.requiredConnections)
         {
 
-            childDevice = Instantiate(devicePrefab, taskList.transform);
-            childDevice.transform.Find("Header").GetComponentInChildren<TextMeshProUGUI>().text = connectionRequirement.device.name;
-            List<GameObject> tasks = new List<GameObject>();
-
-            //childDevice.transform.Find("Header").GetComponentInChildren<TextMeshProUGUI>().text = "Something";
-            //childDevice.transform.Find("Header").GetComponentInChildren<TextMeshProUGUI>().text = "Something";
-            foreach (Connection connection in connectionRequirement.requiredConnections)
+            if (deviceHasTask(connectionRequirement.device))
             {
-                childItem = Instantiate(itemPrefab, childDevice.transform.Find("Connections").transform);
-                childItem.GetComponentInChildren<TextMeshProUGUI>().text = connection.ToString();
-                childItem.GetComponentInChildren<TextMeshProUGUI>().enableAutoSizing = true;
-                childItem.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
-                tasks.Add(childItem);
+                for (int i = 0; i < taskList.transform.childCount; i++)
+                {
+                    if (taskList.transform.GetChild(i).transform.Find("Header").GetComponentInChildren<TextMeshProUGUI>().text == connectionRequirement.device.name)
+                    {
+                        childItem = Instantiate(itemPrefab, taskList.transform.GetChild(i).transform.Find("Connections").transform);
+                        childItem.GetComponentInChildren<TextMeshProUGUI>().text = connection.ToString();
+                        childItem.GetComponentInChildren<TextMeshProUGUI>().enableAutoSizing = true;
+                        childItem.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+                        break;
+                    }
+                }
+                
+                continue;
             }
-            allDevices.Add(new DeviceWithTasks { device = connectionRequirement.device, deviceTasks = tasks });
+
+            childItem = Instantiate(itemPrefab, childDevice.transform.Find("Connections").transform);
+            childItem.GetComponentInChildren<TextMeshProUGUI>().text = connection.ToString();
+            childItem.GetComponentInChildren<TextMeshProUGUI>().enableAutoSizing = true;
+            childItem.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+
+
+            deviceWithTasks.deviceTasks.Add(childItem);
+
         }
+        if (deviceWithTasks.deviceTasks.Count > 0)
+        {
+            allDevices.Add(deviceWithTasks);
+        }
+    }
+
+    private bool deviceHasTask(Device device)
+    {
+        foreach (var item in allDevices)
+        {
+            if (item.device.name == device.name)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
