@@ -34,7 +34,7 @@ public class SimulationManager : MonoBehaviour
         devices = new List<Device>(FindObjectsOfType<Device>());
         if(requirementData != null)
         {
-            FillTaskList();
+            //FillTaskList();
         }
         foreach(ConnectionRequirement requiredConnection in requirementData.requiredConnections)
         {
