@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using TMPro;
+using UnityEditor.MemoryProfiler;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem.XR.Haptics;
@@ -19,16 +20,9 @@ public class EditManager : MonoBehaviour
     [SerializeField] private TMP_Dropdown deviceDropdown;
     
     List<GameObject> spawnedGameObjects = new List<GameObject>();
-    List<DeviceWithTasks> allDevices;    //used to differentiate between identical tasks on different devices
     RequirementData requirementData;
 
     Dictionary<string, string> possibleConnections;
-
-    struct DeviceWithTasks
-    {
-        public Device device;
-        public List<GameObject> deviceTasks;
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +34,6 @@ public class EditManager : MonoBehaviour
         possibleConnections.Add("3.5 mm Audio", "3.5 mm Audio");
 
 
-        allDevices = new List<DeviceWithTasks>();
         requirementData = new RequirementData();
         requirementData.requiredConnections = new List<ConnectionRequirement>();
         fillDeviceDropDown();    
@@ -105,7 +98,7 @@ public class EditManager : MonoBehaviour
         }
     }
 
-    void updateTasks(GameObject newObject)//Toks spaghetti, kad WOW
+    void updateTasks(GameObject newObject)
     {
         Device spawnedDevice = newObject.GetComponent<Device>();
 
@@ -128,14 +121,16 @@ public class EditManager : MonoBehaviour
                 SocketType socketType = new SocketType();
                 socketType = 0;
 
-                Device device1 = gameObjectInScene.GetComponent<Device>();
-                
-                Connection connection = new Connection(device1, connector, socketType);
+                Device device = gameObjectInScene.GetComponent<Device>();
+                device.name = device.name.Replace("(Clone)", "");
+
+                Connection connection = new Connection(device, connector, socketType);
                 requirement.requiredConnections.Add(connection);
             }
 
             if (requirement.requiredConnections.Count > 0)
             {
+                requirement.device.name = requirement.device.name.Replace("(Clone)", "");
                 requirementData.requiredConnections.Add(requirement);
                 FillTaskList(requirement);
             }
@@ -154,7 +149,7 @@ public class EditManager : MonoBehaviour
             {
                 if (oldDevicePort.name.Contains(possibleConnection.Key))
                 {
-                    string newName = spawnedDevicePort.name.Replace(possibleConnection.Key, "");
+                    string newName = oldDevicePort.name.Replace(possibleConnection.Key, "");
 
                     if (spawnedDevicePort.name.Contains(possibleConnection.Value) && spawnedDevicePort.name.Contains(newName))
                     {
@@ -180,63 +175,39 @@ public class EditManager : MonoBehaviour
         GameObject childDevice;
         GameObject childItem;
 
+        Transform connectionList = getConnectionList(connectionRequirement.device);
 
-        //fix later:
-        childDevice = Instantiate(devicePrefab, taskList.transform);
-        childDevice.transform.Find("Header").GetComponentInChildren<TextMeshProUGUI>().text = connectionRequirement.device.name;
-        List<GameObject> tasks = new List<GameObject>();
-
-        //childDevice.transform.Find("Header").GetComponentInChildren<TextMeshProUGUI>().text = "Something";
-        //childDevice.transform.Find("Header").GetComponentInChildren<TextMeshProUGUI>().text = "Something";
-        
-        DeviceWithTasks deviceWithTasks = new DeviceWithTasks();
-        deviceWithTasks.device = connectionRequirement.device;
-        deviceWithTasks.deviceTasks = new List<GameObject>();
+        //if device doesnt have connections already, create new device and write connections to it.
+        if (connectionList == null){
+            
+            childDevice = Instantiate(devicePrefab, taskList.transform);
+            childDevice.transform.Find("Header").GetComponentInChildren<TextMeshProUGUI>().text = connectionRequirement.device.name;
+            connectionList = childDevice.transform.Find("Connections").transform;
+        }
 
         foreach (Connection connection in connectionRequirement.requiredConnections)
         {
-
-            if (deviceHasTask(connectionRequirement.device))
-            {
-                for (int i = 0; i < taskList.transform.childCount; i++)
-                {
-                    if (taskList.transform.GetChild(i).transform.Find("Header").GetComponentInChildren<TextMeshProUGUI>().text == connectionRequirement.device.name)
-                    {
-                        childItem = Instantiate(itemPrefab, taskList.transform.GetChild(i).transform.Find("Connections").transform);
-                        childItem.GetComponentInChildren<TextMeshProUGUI>().text = connection.ToString();
-                        childItem.GetComponentInChildren<TextMeshProUGUI>().enableAutoSizing = true;
-                        childItem.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
-                        break;
-                    }
-                }
-                
-                continue;
-            }
-
-            childItem = Instantiate(itemPrefab, childDevice.transform.Find("Connections").transform);
+            childItem = Instantiate(itemPrefab, connectionList);
             childItem.GetComponentInChildren<TextMeshProUGUI>().text = connection.ToString();
             childItem.GetComponentInChildren<TextMeshProUGUI>().enableAutoSizing = true;
             childItem.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
-
-
-            deviceWithTasks.deviceTasks.Add(childItem);
-
-        }
-        if (deviceWithTasks.deviceTasks.Count > 0)
-        {
-            allDevices.Add(deviceWithTasks);
         }
     }
 
-    private bool deviceHasTask(Device device)
+    /// <summary>
+    /// if device already has tasks, get its connection list.
+    /// </summary>
+    /// <param name="device">latest spawned device</param>
+    /// <returns></returns>
+    private Transform getConnectionList(Device device)
     {
-        foreach (var item in allDevices)
+        for (int i = 0; i < taskList.transform.childCount; i++)
         {
-            if (item.device.name == device.name)
+            if (taskList.transform.GetChild(i).transform.Find("Header").GetComponentInChildren<TextMeshProUGUI>().text == device.name)
             {
-                return true;
+                return taskList.transform.GetChild(i).transform.Find("Connections").transform;
             }
         }
-        return false;
+        return null;
     }
 }
