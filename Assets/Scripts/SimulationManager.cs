@@ -34,7 +34,7 @@ public class SimulationManager : MonoBehaviour
         devices = new List<Device>(FindObjectsOfType<Device>());
         if(requirementData != null)
         {
-            FillTaskList();
+            //FillTaskList();
         }
         foreach(ConnectionRequirement requiredConnection in requirementData.requiredConnections)
         {
@@ -63,6 +63,7 @@ public class SimulationManager : MonoBehaviour
             {
                 childItem = Instantiate(itemPrefab, childDevice.transform.Find("Connections").transform);
                 childItem.GetComponentInChildren<TextMeshProUGUI>().text = connection.ToString();
+                childItem.GetComponentInChildren<TextMeshProUGUI>(). enableAutoSizing = true;
                 childItem.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
                 tasks.Add(childItem);
             }

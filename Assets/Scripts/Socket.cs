@@ -122,7 +122,7 @@ public class Socket : XRSocketInteractor
                     || thisEnd.socketType == SocketType.Out && otherEnd.socketType == SocketType.In)
                 {
                     currentConnection = new Connection(otherEnd.connectedToDevice, connectorData, otherEnd.socketType);
-                    currentOtherEndConnection = new Connection(device, connectorData, socketType);
+                    currentOtherEndConnection = new Connection(device, otherEnd.GetConnectorType(), socketType);
                     device.connections.Add(currentConnection);
                     otherEnd.connectedToDevice.connections.Add(currentOtherEndConnection);
                 }

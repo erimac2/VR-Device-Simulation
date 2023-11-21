@@ -36,7 +36,7 @@ public class Connection : IEquatable<Connection>
     }
     public override string ToString()
     {
-        return otherDevice.name + " " + connectorData.name;
+        return connectorData.name + " to " + otherDevice.name;
     }
     public override bool Equals(object other)
     {

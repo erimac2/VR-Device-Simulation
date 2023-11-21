@@ -35,4 +35,9 @@ public class Connector : MonoBehaviour
     {
         return connectorData.Type.CompareTo(data.Type) == 0;
     }
+
+    public ConnectorData GetConnectorType()
+    {
+        return connectorData;
+    }
 }
