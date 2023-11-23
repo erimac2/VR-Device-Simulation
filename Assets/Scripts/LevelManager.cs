@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -11,28 +13,64 @@ public class LevelManager : MonoBehaviour
     private string conectionPath;
     public void Start()
     {
-        paths = new List<string>();
-        paths.Add(Application.persistentDataPath + "/ObjectData.json");
-        paths.Add(Application.persistentDataPath + "/ConnectionData.json");
+
     }
     public void Save()
-    {
-        Connector[] allConnectors = GameObject.FindObjectsOfType<Connector>();
-        foreach (string path in paths)
+    {/*
+        string path = Application.persistentDataPath + "/LevelData.json";
+        if (File.Exists(path))
+            File.Delete(path);
+        else
+            File.Create(path);
+        object[] data = FindObjectsOfType<GameObject>();
+        File.AppendAllText(path, "{\n\"JSONList\" : [\n");
+        int i = 0;
+        foreach (object obj in data)
         {
-            if (File.Exists(path))
-                File.Delete(path);
-            else
-                File.Create(path);
+            GameObject go = (GameObject)obj;
+            string prefabPath = "";
+            if (ObjectPrefabPaths.paths.ContainsKey(go.name))
+            {
+                i++;
+                // -- Alternative --
+                /*
+                string some_path_for_asset = "Assets/LevelAssets/" + go.name + ".prefab";
+                AssetDatabase.CreateAsset(go, some_path_for_asset);
+                prefabPath = AssetDatabase.GetAssetPath(go);
+                */
+/*            prefabPath = ObjectPrefabPaths.paths[go.name];
+                StorableObject storableObject = new StorableObject(go.name, prefabPath, go.transform.position, go.transform.rotation);
+                string json = storableObject.Serialize((GameObject)obj);
+                File.AppendAllText(path, json);
+                if (ObjectPrefabPaths.paths.Keys.Count != i)
+                    File.AppendAllText(path, ",\n");
+            }
+        }
+        File.AppendAllText(path, "\n]\n}");
+        Debug.Log("Saved to: " + path);
+*/
+
+
+
+        List<string> deviceType = new List<string>();
+        deviceType.Add("Devices");
+        deviceType.Add("Connectors");
+        Connector[] allConnectors = GameObject.FindObjectsOfType<Connector>();
+        string path = Application.persistentDataPath + "/LevelData.json";
+        if (File.Exists(path))
+            File.Delete(path);
+        else
+            File.Create(path);
+        File.AppendAllText(path, "{");
+        foreach (string type in deviceType)
+        {
             Transform transform;
-            if (path.Contains("Object"))
-                transform = GameObject.Find("Devices").transform;
-            else
-                transform = GameObject.Find("Connectors").transform;
+            transform = GameObject.Find(type).transform;
             //object[] data = transform.GetComponentsInChildren<Transform>();
-            File.AppendAllText(path, "{\n\"JSONList\" : [\n");
+            string jsonList = "\n\"JSONList" + type.TrimStart('"').TrimEnd('"') + "\" : [\n";
+            File.AppendAllText(path, jsonList);
             int deviceCount = 0;
-            int cableCount = 0;
+            int connectorCount = 0;
             foreach (Transform obj in transform)
             {
                 GameObject go = obj.gameObject;
@@ -61,7 +99,7 @@ public class LevelManager : MonoBehaviour
                     {
                         if (prefabPath.Contains("Cables"))
                         {
-                            cableCount++;
+                            connectorCount++;
                             List<Connector> thisConn = new List<Connector>();
                             foreach (Connector conn in allConnectors)
                             {
@@ -73,7 +111,7 @@ public class LevelManager : MonoBehaviour
                             storable = new StorableCable(go.name, prefabPath, go.transform.position, go.transform.rotation, thisConn[0].gameObject.transform.position, thisConn[0].gameObject.transform.rotation, thisConn[1].gameObject.transform.position, thisConn[1].gameObject.transform.rotation);
                             json = storable.Serialize(obj.gameObject);
                             File.AppendAllText(path, json);
-                            if (ObjectPrefabPaths.GetCableCount() != cableCount)
+                            if (ObjectPrefabPaths.GetCableCount() != connectorCount)
                                 File.AppendAllText(path, ",\n");
                         }
                         else
@@ -82,62 +120,119 @@ public class LevelManager : MonoBehaviour
                             json = storable.Serialize(obj.gameObject);
                             File.AppendAllText(path, json);
                             File.AppendAllText(path, ",\n");
+                            
                         }
                     }
                     //todo: fix so that components loaded from json are will be saved when trying to save again
                 }
             }
-            File.AppendAllText(path, "\n]\n}");
-            Debug.Log("Saved to: " + objectPath);
-        }
-    }
-    public void Load()
-    {
-        foreach (string path in paths)
-        {
-            if (File.Exists(path))
+            if (type.Equals(deviceType.Last()))
             {
-                string data = File.ReadAllText(path);
-                if (path.Contains("Object"))
-                {
-                    StorableObjectList list = JsonUtility.FromJson<StorableObjectList>(data);
-                    Debug.Log("List length: " + list.JSONList.Count);
-                    foreach (StorableObject obj in list.JSONList)
-                    {
-                        //Debug.Log("Prefab path in load: " + obj.prefabPath);
-                        var prefab = AssetDatabase.LoadAssetAtPath(obj.prefabPath, typeof(GameObject));
-                        Instantiate(prefab, obj.position, obj.rotation);
-                        if (!ObjectPrefabPaths.paths.ContainsKey(obj.objectName))
-                        {
-                            ObjectPrefabPaths.paths.Add(obj.objectName, obj.prefabPath);
-                        }
-                        ObjectPrefabPaths.IncreaseDeviceCount();
-                    }
-                }
-                else if (path.Contains("Connection"))
-                {
-                    StorableCableList list = JsonUtility.FromJson<StorableCableList>(data);
-                    Debug.Log("List length: " + list.JSONList.Count);
-                    foreach (StorableCable obj in list.JSONList)
-                    {
-                        //Debug.Log("Prefab path in load: " + obj.prefabPath);
-                        var prefab = AssetDatabase.LoadAssetAtPath(obj.prefabPath, typeof(GameObject));
-                        GameObject go = Instantiate(prefab, obj.position, obj.rotation) as GameObject;
-                        go.transform.GetChild(0).position = obj.positionOfFirstPlug;
-                        go.transform.GetChild(0).rotation = obj.rotationOfFirstPlug;
-                        go.transform.GetChild(1).position = obj.positionOfSecondPlug;
-                        go.transform.GetChild(1).rotation = obj.rotationOfSecondPlug;
-                        if (!ObjectPrefabPaths.paths.ContainsKey(obj.objectName))
-                        {
-                            ObjectPrefabPaths.paths.Add(obj.objectName, obj.prefabPath);
-                        }
-                        ObjectPrefabPaths.IncreaseCableCount();
-                    }
-
-                }
+                File.AppendAllText(path, "\n]\n}");
             }
             else
-                Debug.Log("Saved file does not exist!");
+            {
+                File.AppendAllText(path, "\n],");
+            }
         }
+        Debug.Log("Saved to: " + path);
     }
+
+    public static void Load() // sceneName - scene, where objects should be loaded
+    {
+        //SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
+        //Debug.Log(SceneManager.GetActiveScene().name);
+
+
+        /*
+        
+        string path = Application.persistentDataPath + "/LevelData.json";
+        if (File.Exists(path))
+        {
+            string data = File.ReadAllText(path);
+            StorableObjectList list = JsonUtility.FromJson<StorableObjectList>(data);
+            Debug.Log("List length: " + list.JSONList.Count);
+            foreach (StorableObject obj in list.JSONList)
+            {
+                //Debug.Log("Prefab path in load: " + obj.prefabPath);
+                var prefab = AssetDatabase.LoadAssetAtPath(obj.prefabPath, typeof(GameObject));
+                Instantiate(prefab, obj.position, obj.rotation);
+                //foreach ()
+            }
+        }
+        else
+            Debug.Log("Saved file does not exist!");
+
+
+
+
+
+        */
+
+        string path = Application.persistentDataPath + "/LevelData.json";
+
+        if (File.Exists(path))
+        {
+            JsonAllObjectsArray test = JsonUtility.FromJson<JsonAllObjectsArray>(path);
+
+
+
+
+
+            StorableObject[] jsonObjects = JsonUtility.FromJson<StorableObject[]>(path);
+            StorableCable[] jsonCables = JsonUtility.FromJson<StorableCable[]>(path);
+
+
+
+            string data = File.ReadAllText(path);
+            if (path.Contains("Object"))
+            {
+                StorableObjectList list = JsonUtility.FromJson<StorableObjectList>(data);
+                Debug.Log("List length: " + list.JSONList.Count);
+                foreach (StorableObject obj in list.JSONList)
+                {
+                    //Debug.Log("Prefab path in load: " + obj.prefabPath);
+                    var prefab = AssetDatabase.LoadAssetAtPath(obj.prefabPath, typeof(GameObject));
+                    Instantiate(prefab, obj.position, obj.rotation);
+                    if (!ObjectPrefabPaths.paths.ContainsKey(obj.objectName))
+                    {
+                        ObjectPrefabPaths.paths.Add(obj.objectName, obj.prefabPath);
+                    }
+                    ObjectPrefabPaths.IncreaseDeviceCount();
+                }
+            }
+            else if (path.Contains("Connection"))
+            {
+                StorableCableList list = JsonUtility.FromJson<StorableCableList>(data);
+                Debug.Log("List length: " + list.JSONList.Count);
+                foreach (StorableCable obj in list.JSONList)
+                {
+                    //Debug.Log("Prefab path in load: " + obj.prefabPath);
+                    var prefab = AssetDatabase.LoadAssetAtPath(obj.prefabPath, typeof(GameObject));
+                    GameObject go = Instantiate(prefab, obj.position, obj.rotation) as GameObject;
+                    go.transform.GetChild(0).position = obj.positionOfFirstPlug;
+                    go.transform.GetChild(0).rotation = obj.rotationOfFirstPlug;
+                    go.transform.GetChild(1).position = obj.positionOfSecondPlug;
+                    go.transform.GetChild(1).rotation = obj.rotationOfSecondPlug;
+                    if (!ObjectPrefabPaths.paths.ContainsKey(obj.objectName))
+                    {
+                        ObjectPrefabPaths.paths.Add(obj.objectName, obj.prefabPath);
+                    }
+                    ObjectPrefabPaths.IncreaseCableCount();
+                }
+
+            }
+        }
+        else
+            Debug.Log("Saved file does not exist!");
+    }
+
 }
+
+[System.Serializable]
+public class JsonAllObjectsArray
+{
+    public StorableObject[] JSONListDevices;
+    public StorableCable[] JSONListConnectors;
+}
+
