@@ -1,24 +1,28 @@
 using System.Collections.Generic;
-using System.Data.Common;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using TMPro;
-using UnityEditor.MemoryProfiler;
-using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.InputSystem.XR.Haptics;
-using static UnityEngine.UI.GridLayoutGroup;
+using UnityEngine.XR;
+using UnityEditor;
+using System.Collections;
 
 public class EditManager : MonoBehaviour
 {
 
     [SerializeField] private GameObject taskList;
     [SerializeField] private GameObject devicePrefab;
-    [SerializeField] private GameObject itemPrefab;
+    [SerializeField] private GameObject itemPrefab; 
 
-    [SerializeField] private TMP_Dropdown deviceDropdown;
-    
+    //[SerializeField] private TMP_Dropdown deviceDropdown;
+
+    [SerializeField] private GameObject[] devicePrefabs;
+    [SerializeField] private GameObject[] cablePrefabs;
+    [SerializeField] private GameObject controller;
+    private int selectedDeviceIndex = -1;
+    private int selectedCableIndex = -1;
+    private int objectIndex = 0;
+    private bool placing = false;
+    private bool isDevice = false;
+    private GameObject obj; // the obj that is created
     List<GameObject> spawnedGameObjects = new List<GameObject>();
     RequirementData requirementData;
 
@@ -36,16 +40,50 @@ public class EditManager : MonoBehaviour
 
         requirementData = new RequirementData();
         requirementData.requiredConnections = new List<ConnectionRequirement>();
-        fillDeviceDropDown();    
+        //fillDeviceDropDown();    
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if (placing)
+        {
+            bool triggerValue;
+            InputDevices.GetDeviceAtXRNode(XRNode.RightHand).TryGetFeatureValue(CommonUsages.triggerButton,
+                              out triggerValue);
+            bool cancelValue;
+            InputDevices.GetDeviceAtXRNode(XRNode.LeftHand).TryGetFeatureValue(CommonUsages.triggerButton,
+                  out cancelValue);
+            if (triggerValue)
+            {
+                placing = false;
+                var components = obj.GetComponentsInChildren<Rigidbody>();
+                foreach (var component in components)
+                {
+                    component.useGravity = true; // restore gravity for placed obejcts
+                    if (isDevice)
+                        StartCoroutine(SetKinematic(component, 1f));
+                }
+                updateTasks(obj);
+            }
+            else
+            {
+                obj.transform.SetPositionAndRotation(controller.transform.position, controller.transform.rotation);
+            }
+            if (cancelValue)
+            {
+                placing = false;
+                Destroy(obj);
+            }
+        }
+        IEnumerator SetKinematic(Rigidbody rb, float delayTime)
+        {
+            yield return new WaitForSeconds(delayTime);
+            rb.isKinematic = true;
+        }
     }
 
-    private void fillDeviceDropDown()
+    /*private void fillDeviceDropDown()
     {
         DirectoryInfo dir = new DirectoryInfo("Assets/Resources/Prefabs/Devices");
         FileInfo[] files = dir.GetFiles("*.*");
@@ -58,49 +96,71 @@ public class EditManager : MonoBehaviour
                 deviceDropdown.options.Add(new TMP_Dropdown.OptionData() { text = name });
             }
         }
-    }
-    
-    //objectType need to be the same as the name of prefab folder.
-    public void spawnObject(string objectType)
+    }*/
+    private GameObject SelectedDevice
     {
-        if (string.IsNullOrEmpty(objectType))
+        get
         {
-            Debug.LogError("Object type not specified.");
-            return;
-        }
-
-        DirectoryInfo dir = new DirectoryInfo($"Assets/Resources/Prefabs/{objectType}");
-        FileInfo[] files = dir.GetFiles("*.*");
-
-        List<TMP_Dropdown.OptionData> dropdownitems = deviceDropdown.options;
-        int selectedData = deviceDropdown.value;
-
-        foreach (FileInfo file in files)
-        {
-            if (file.Name == dropdownitems[selectedData].text + ".prefab")
-            {
-                string newFileName = file.Name.Replace(".prefab", "");
-                string prefabPath = $"Prefabs/{objectType}/{newFileName}";
-                
-                Object pPrefab = Resources.Load(prefabPath);
-
-                if (pPrefab != null)
-                {
-                    GameObject device = (GameObject)Instantiate(pPrefab, this.transform.position, this.transform.rotation);
-                    updateTasks(device);
-                }
-                else
-                {
-                    Debug.LogError($"Prefab not found at path: {prefabPath}");
-                }
-                return;
-            }
+            return selectedDeviceIndex >= 0 && selectedDeviceIndex < devicePrefabs.Length
+                ? devicePrefabs[selectedDeviceIndex] : null;
         }
     }
+    private GameObject SelectedCable
+    {
+        get
+        {
+            return selectedCableIndex >= 0 && selectedCableIndex < cablePrefabs.Length
+                ? cablePrefabs[selectedCableIndex] : null;
+        }
+    }
+    //objectType need to be the same as the name of prefab folder.
+    public void spawnObject(bool isDevice)
+    {
+        if (SelectedDevice != null || SelectedCable != null)
+        {
+            this.isDevice = isDevice;
+            GameObject temp = isDevice ? SelectedDevice : SelectedCable;
+            obj = Instantiate(temp, controller.transform.position, controller.transform.rotation);
+            selectedDeviceIndex = -1; // reset values
+            selectedCableIndex = -1;
+            string prefabPath = AssetDatabase.GetAssetPath(temp);
 
+            //updateTasks(obj);
+            Debug.Log("Prefab path: " + prefabPath);
+            obj.name = obj.name.Replace("(Clone)", "");
+            if (ObjectPrefabPaths.paths.ContainsKey(obj.name))
+            {
+                obj.name = obj.name + objectIndex;
+                objectIndex++;
+                ObjectPrefabPaths.paths.Add(obj.name, prefabPath);
+            }
+            else
+            {
+                ObjectPrefabPaths.paths.Add(obj.name, prefabPath);
+            }
+            placing = true;
+            var components = obj.GetComponentsInChildren<Rigidbody>();
+            foreach (var component in components)
+            {
+                component.useGravity = false; // disable gravity while placing objects
+                component.isKinematic = false;
+            }
+        
+            //oldColor = obj.GetComponent<Renderer>().material.
+        }
+    }
+    public void SelectDevice(int index)
+    {
+        selectedDeviceIndex = index;
+    }
+    public void SelectCable(int index)
+    {
+        selectedCableIndex = index;
+    }
     void updateTasks(GameObject newObject)
     {
         Device spawnedDevice = newObject.GetComponent<Device>();
+        spawnedGameObjects.Add(newObject);
 
         foreach (GameObject gameObjectInScene in spawnedGameObjects)
         {
@@ -135,7 +195,7 @@ public class EditManager : MonoBehaviour
                 FillTaskList(requirement);
             }
         }
-        spawnedGameObjects.Add(newObject);
+        
     }
     
     private bool isConnectionPossible(GameObject gameObjectInScene, GameObject spawnedDevicePort)
@@ -210,4 +270,8 @@ public class EditManager : MonoBehaviour
         }
         return null;
     }
+}
+public static class ObjectPrefabPaths
+{
+    public static Dictionary<string, string> paths = new Dictionary<string, string>(); // key - object_name, value - prefab_path
 }
