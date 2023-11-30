@@ -51,6 +51,7 @@ public class CreateObject : MonoBehaviour
             foreach (var component in components)
             {
                 component.useGravity = false; // disable gravity while placing objects
+                component.isKinematic = true;
             }
             //oldColor = obj.GetComponent<Renderer>().material.
         }
@@ -93,7 +94,7 @@ public class CreateObject : MonoBehaviour
     }
 }
 
-public static class ObjectPrefabPaths
+/*public static class ObjectPrefabPaths
 {
     public static Dictionary<string, string> paths = new Dictionary<string, string>(); // key - object_name, value - prefab_path
-}
+}*/

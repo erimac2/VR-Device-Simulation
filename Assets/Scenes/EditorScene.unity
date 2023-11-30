@@ -904,7 +904,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Monitor
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2876,10 +2876,28 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
-    m_Options: []
+    m_Options:
+    - m_Text: Monitor
+      m_Image: {fileID: 0}
+    - m_Text: Computer
+      m_Image: {fileID: 0}
+    - m_Text: TV
+      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 539547077}
+        m_TargetAssemblyTypeName: EditManager, Assembly-CSharp
+        m_MethodName: SelectDevice
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &362324218
 MonoBehaviour:
@@ -3972,9 +3990,9 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 495059027}
-        m_TargetAssemblyTypeName: CreateObject, Assembly-CSharp
-        m_MethodName: SelectPrefab
+      - m_Target: {fileID: 539547077}
+        m_TargetAssemblyTypeName: EditManager, Assembly-CSharp
+        m_MethodName: SelectCable
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4030,7 +4048,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 495059022}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47f86b0e35ff7e943bdd4e87394ca0dd, type: 3}
   m_Name: 
@@ -4664,7 +4682,14 @@ MonoBehaviour:
     type: 3}
   itemPrefab: {fileID: 5411684525960926863, guid: d20e6308223e6634b83e727830f5cf3c,
     type: 3}
-  deviceDropdown: {fileID: 362324217}
+  devicePrefabs:
+  - {fileID: 4103852475142950840, guid: 930431c4334ceb64791c5d7650bdd9d7, type: 3}
+  - {fileID: 6475051436834013670, guid: f12c8507fe6b8244ca278dfac561312a, type: 3}
+  - {fileID: 2563413534957710809, guid: 8ead1c9558c4e8e4c87ee2fe00617832, type: 3}
+  cablePrefabs:
+  - {fileID: 7911004367817538595, guid: 8182fa7f206b3bc4583d95cd274aea0c, type: 3}
+  - {fileID: 4307824869056325160, guid: 1f91b2882425b8c42ac017c616cae672, type: 3}
+  controller: {fileID: 812158570}
 --- !u!4 &539547078
 Transform:
   m_ObjectHideFlags: 0
@@ -7579,10 +7604,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 495059027}
-        m_TargetAssemblyTypeName: CreateObject, Assembly-CSharp
-        m_MethodName: Create
-        m_Mode: 1
+      - m_Target: {fileID: 539547077}
+        m_TargetAssemblyTypeName: EditManager, Assembly-CSharp
+        m_MethodName: spawnObject
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -11095,14 +11120,14 @@ MonoBehaviour:
       - m_Target: {fileID: 539547077}
         m_TargetAssemblyTypeName: EditManager, Assembly-CSharp
         m_MethodName: spawnObject
-        m_Mode: 5
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Devices
-          m_BoolArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1545087680
 MonoBehaviour:
