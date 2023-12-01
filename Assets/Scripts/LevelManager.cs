@@ -38,17 +38,17 @@ public class LevelManager : MonoBehaviour
                 AssetDatabase.CreateAsset(go, some_path_for_asset);
                 prefabPath = AssetDatabase.GetAssetPath(go);
                 */
-/*            prefabPath = ObjectPrefabPaths.paths[go.name];
-                StorableObject storableObject = new StorableObject(go.name, prefabPath, go.transform.position, go.transform.rotation);
-                string json = storableObject.Serialize((GameObject)obj);
-                File.AppendAllText(path, json);
-                if (ObjectPrefabPaths.paths.Keys.Count != i)
-                    File.AppendAllText(path, ",\n");
-            }
-        }
-        File.AppendAllText(path, "\n]\n}");
-        Debug.Log("Saved to: " + path);
-*/
+        /*            prefabPath = ObjectPrefabPaths.paths[go.name];
+                        StorableObject storableObject = new StorableObject(go.name, prefabPath, go.transform.position, go.transform.rotation);
+                        string json = storableObject.Serialize((GameObject)obj);
+                        File.AppendAllText(path, json);
+                        if (ObjectPrefabPaths.paths.Keys.Count != i)
+                            File.AppendAllText(path, ",\n");
+                    }
+                }
+                File.AppendAllText(path, "\n]\n}");
+                Debug.Log("Saved to: " + path);
+        */
 
 
 
@@ -120,7 +120,7 @@ public class LevelManager : MonoBehaviour
                             json = storable.Serialize(obj.gameObject);
                             File.AppendAllText(path, json);
                             File.AppendAllText(path, ",\n");
-                            
+
                         }
                     }
                     //todo: fix so that components loaded from json are will be saved when trying to save again

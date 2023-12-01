@@ -33,6 +33,7 @@ public class CreateObject : MonoBehaviour
     {
         if (SelectedPrefab != null)
         {
+            obj = Instantiate(SelectedPrefab, controller.transform.position, controller.transform.rotation);
             GameObject obj = Instantiate(SelectedPrefab, controller.transform.position, controller.transform.rotation);
             MonoScript targetScript = MonoScript.FromMonoBehaviour(obj.GetComponent<Device>());
 
@@ -73,6 +74,7 @@ public class CreateObject : MonoBehaviour
             foreach (var component in components)
             {
                 component.useGravity = false; // disable gravity while placing objects
+                component.isKinematic = true;
             }
             //oldColor = obj.GetComponent<Renderer>().material.
         }
