@@ -33,14 +33,12 @@ public class CreateObject : MonoBehaviour
     {
         if (SelectedPrefab != null)
         {
-            obj = Instantiate(SelectedPrefab, controller.transform.position, controller.transform.rotation);
             GameObject obj = Instantiate(SelectedPrefab, controller.transform.position, controller.transform.rotation);
             MonoScript targetScript = MonoScript.FromMonoBehaviour(obj.GetComponent<Device>());
 
             if (targetScript != null)
             {
                 obj.transform.parent = GameObject.Find("Devices").transform;
-                ObjectPrefabPaths.IncreaseDeviceCount();
             }
             else
             {
@@ -48,7 +46,7 @@ public class CreateObject : MonoBehaviour
                 if (targetScript != null)
                 {
                     obj.transform.parent = GameObject.Find("Connectors").transform;
-                    ObjectPrefabPaths.IncreaseCableCount();
+
                 }
                 else
                 {
@@ -120,26 +118,4 @@ public class CreateObject : MonoBehaviour
 public static class ObjectPrefabPaths
 {
     public static Dictionary<string, string> paths = new Dictionary<string, string>(); // key - object_name, value - prefab_path
-    private static int DeviceCount = 0;
-    private static int CableCount = 0;
-
-    public static void IncreaseDeviceCount()
-    {
-        DeviceCount++;
-    }
-
-    public static void IncreaseCableCount()
-    {
-        CableCount++;
-    }
-
-    public static int GetDeviceCount()
-    {
-        return DeviceCount;
-    }
-
-    public static int GetCableCount()
-    {
-        return CableCount;
-    }
 }
